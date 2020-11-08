@@ -1,0 +1,222 @@
+{# templates/index.html.twig #}
+{% extends 'template/base_view.twig' %}
+
+{# {% block menu %}{% endblock %} sin menu #}
+
+{% block body %}
+<section class="one banner" id="home">
+    <div class="conten-text container">
+        <h1>Alejandro Sanchez</h1>
+        <p>
+            I'm
+            <span class="element" id="text-type"></span>
+        </p>
+        <div class="social-links">
+            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+    </div>
+
+</section> 
+<section class="two flip" id="services">
+    <h2>MY SERVICES</h2>
+    <div class="conten-flip container" id="comten-scene">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="scene scene--card">
+                    <div class="card card-event-flip" >
+                        <div class="card__face card__face--front">
+                            <div class="flip-content-text">
+                                <h5 class="mb-0">Web Development</h5>
+                            </div>
+                        </div>
+                        <div class="card__face card__face--back">
+                            <div class="flip-content-text">
+                                <div class="services-list-icon">
+                                    <i class='bx bx-code-curly'></i>
+                                </div>
+                                <div class="mt-3">
+                                    <h5 class="mb-0">Web Development</h5>
+                                    <p class=" mt-3">Modern and mobile-ready website that will help of your marketing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="scene scene--card">
+                    <div class="card card-event-flip" >
+                        <div class="card__face card__face--front">
+                            <div class="flip-content-text">
+                                <h5 class="mb-0">Web Development</h5>
+                            </div>
+                        </div>
+                        <div class="card__face card__face--back">
+                            <div class="flip-content-text">
+                                <div class="services-list-icon">
+                                    <i class='bx bx-code-curly'></i>
+                                </div>
+                                <div class="mt-3">
+                                    <h5 class="mb-0">Web Development</h5>
+                                    <p class=" mt-3">Modern and mobile-ready website that will help of your marketing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="scene scene--card">
+                    <div class="card card-event-flip" >
+                        <div class="card__face card__face--front">
+                            <div class="flip-content-text">
+                                <h5 class="mb-0">Web Development</h5>
+                            </div>
+                        </div>
+                        <div class="card__face card__face--back">
+                            <div class="flip-content-text">
+                                <div class="services-list-icon">
+                                    <i class='bx bx-code-curly'></i>
+                                </div>
+                                <div class="mt-3">
+                                    <h5 class="mb-0">Web Development</h5>
+                                    <p class=" mt-3">Modern and mobile-ready website that will help of your marketing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+<section class="three gallery" id="portfolio">
+    <div class="conten-gallery container">
+        <h2>Portfolio</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="https://bootstrapmade.com/demo/themes/MyResume/assets/img/portfolio/portfolio-2.jpg" alt="">
+                        <h5 class="card-title">Title</h5>
+                        <p class="card-text">Content</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="https://bootstrapmade.com/demo/themes/MyResume/assets/img/portfolio/portfolio-2.jpg" alt="">
+                        <h5 class="card-title">Title</h5>
+                        <p class="card-text">Content</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+<section class="four carousel-recomendations" id="recommendations" >
+    <h2>Recommendations</h2>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            {% for recommendation in recommendations %}
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index0 }}" class="{% if loop.first %} active {% endif %}"></li>
+            {% endfor %}
+        </ol>
+        <div class="carousel-inner">
+            {% for recommendation in recommendations %}
+            <div class="carousel-item {% if loop.first %} active {% endif %} ">
+                <div class="recomendacion container">
+                    <img src="{{recommendation.img }}" class="d-block w-100" alt="..."> 
+                    <span class="name">{{ recommendation.name }}</span>
+                    <span class="work">{{ recommendation.work }}</span>
+                    <span class="dateWorkIni">{{ recommendation.dateWorkIni }}</span>
+                    <span class="comment">
+                        <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                        {{ recommendation.comment }}
+                        <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                    </span>
+                </div>
+            </div>
+            {% endfor %}
+
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"></a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"></a>
+      </div>
+</section>
+<section class="five form-contact" id="contact">
+    <div class="container">
+        <h2 >Contact us</h2>
+        <div class="row">
+            <div class="col-lg-4 col-md-12 d-flex align-items-center">
+                <div class="info">
+                    <div class="address">
+                        <i class='bx bxs-map' ></i>
+                      <h4>Location:</h4>
+                      <p>A108 Adam Street, New York, NY 535022</p>
+                    </div>
+      
+                    <div class="email">
+                        <i class='bx bx-envelope' ></i>
+                      <h4>Email:</h4>
+                      <p>info@example.com</p>
+                    </div>
+      
+                    <div class="phone">
+                        <i class='bx bx-phone' ></i>
+                      <h4>Call:</h4>
+                      <p>+1 5589 55488 55s</p>
+                    </div>
+      
+                  </div>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" required="required" name="name" />
+                                <label for="input" class="control-label">Name</label><i class="bar"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" required="required" name="email"  />
+                                <label for="input" class="control-label">Email</label><i class="bar"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" required="required" name="phone" />
+                                <label for="input" class="control-label">Phone</label><i class="bar"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <textarea required="required" name="message"></textarea>
+                                <label for="textarea" class="control-label">Your message</label><i class="bar"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </form>
+            </div>
+            <div class="button-container">
+                <button type="button" class="button"><span>Submit</span></button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
+

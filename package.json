@@ -1,0 +1,53 @@
+{
+  "name": "LoginNode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "1.1.1": "^1.0.0",
+    "bootstrap": "^4.5.3",
+    "boxicons": "^2.0.7",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "jquery": "^3.5.1",
+    "mdbootstrap": "^4.19.1",
+    "mysql": "^2.18.1",
+    "normalize.css": "^8.0.1",
+    "popper.js": "^1.16.1",
+    "twig": "^1.15.2",
+    "typed.js": "^2.0.11",
+    "velocity-animate": "^1.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "desarrollo": "nodemon app.js --config @development",
+    "produccion": "nodemon app.js --config @production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "nodemonConfig": {
+    "default": {
+      "watch": [
+        "src/",
+        "public/"
+      ]
+    },
+    "tasks": {
+      "development": {
+        "env": {
+          "NODE_ENV": "development"
+        }
+      },
+      "production": {
+        "env": {
+          "NODE_ENV": "production"
+        }
+      }
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

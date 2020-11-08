@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Alejandro Sanchez Portfolio{% endblock %}</title>
+        
+        {# Master #}
+            <link rel="stylesheet" href='./normalize/normalize.css' />        
+            <link rel="stylesheet" href='./bootstrap/css/bootstrap.min.css' />           
+            <link rel="stylesheet" href='./boxicons/css/boxicons.min.css' />        
+            <link rel="stylesheet" href='./css/master.css' />       
+            <link rel="stylesheet" href='./css/home.css' />       
+        {# FONTS #}        
+        {% block stylesheets %}{% endblock %}
+        
+    </head>
+    <body>
+        {% block menu %}
+        <header id="header" class="d-flex flex-column justify-content-center" >
+            <!-- .nav-menu -->
+            <nav class="nav-menu">
+                <ul>
+                    <li class="active">
+                        <a href="#home">
+                            <i class="bx bx-home"></i> 
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#services">
+                            <i class="bx bx-server"></i>
+                            <span>Services</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#portfolio">
+                            <i class="bx bx-book-content"></i>
+                            <span>Portfolio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#recommendations">
+                            <i class='bx bx-star'></i>
+                            <span>Recommendations</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contact">
+                            <i class="bx bx-envelope"></i> 
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- .nav-menu -->
+        </header>
+        <div class="cont_menu">
+            <div class="menu">
+                {# <span>Menú</span> #}
+                <a class="McButton" id="sidebarCollapse" data="hamburger-menu" style="transform: rotateZ(0deg);">
+                    <b class="" style="top: 0px;"></b>
+                    <b></b>
+                    <b class="" style="top: 100%; transform: rotateZ(0deg);"></b>
+                </a>
+            </div>
+        </div>
+        {% endblock %}
+
+       <div class="principal">
+        {% block body %}
+        
+        {% endblock %}
+       </div> 
+
+
+        {% block footer %}
+        <footer >
+            <div class="container">
+                <h3>Alejandro Sanchez</h3>
+                {# <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p> #}
+                <div class="social-links">
+                    <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                    <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                    <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                    <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                    <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                </div>
+                <div class="copyright">
+                    © Copyright <strong><span>MyResume</span></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                    <!-- All the links in the footer should remain intact. -->
+                    <!-- You can delete the links only if you purchased the pro version. -->
+                    <!-- Licensing information: [license-url] -->
+                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/ -->
+                    Designed by <a href="#">Alejandro Sanchez</a>
+                </div>
+            </div>
+        </footer>
+        <a href="#" class="back-to-top" style="display: inline;"><i class="bx bx-up-arrow-alt"></i></a>
+        {% endblock %}
+        {# Global Variables  #}
+        <script></script>
+
+        {# library #}
+        <script  type="text/javascript" src="./jquery/jquery.min.js" ></script>
+        <script  type="text/javascript" src="./popper/popper.min.js" ></script>
+        <script  type="text/javascript" src="./bootstrap/js/bootstrap.min.js" ></script>
+        <script  type="text/javascript" src="./velocity/velocity.min.js" ></script>
+        <script  type="text/javascript" src="./typed/typed.min.js" ></script>
+        <script  type="text/javascript" src="./js/master.js" ></script>
+
+        {# Latest compiled JavaScript #}
+        {% block javascripts %}{% endblock %}
+        
+    </body>
+</html>
+
+
+
+
+
