@@ -17,7 +17,6 @@ class HomeController {
     res.render('home_view.twig',{
        recommendations,
     });
-    console.log(recommendations);
   }
 }
 

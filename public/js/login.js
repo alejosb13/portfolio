@@ -10,7 +10,7 @@ $(document).ready(function () {
         if(username && password){
             $.ajax({
                 type: "post",
-                url: "./auth",
+                url: BASE_URL+"auth",
                 data: {
                     username:username,
                     password:password
@@ -18,7 +18,7 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (response) {
                     if(response.valid){
-                        window.location ="./home"
+                        window.location = BASE_URL+"home"
                     }else{
                         console.log(response.message);
                     }

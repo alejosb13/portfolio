@@ -21,6 +21,7 @@ app.use('/popper', express.static(__dirname + '/node_modules/popper.js/dist/umd'
 app.use('/velocity', express.static(__dirname + '/node_modules/velocity-animate'));
 app.use('/typed', express.static(__dirname + '/node_modules/typed.js/lib'));
 app.use('/boxicons', express.static(__dirname + '/node_modules/boxicons'));
+app.use('/scrollbar', express.static(__dirname + '/node_modules/malihu-custom-scrollbar-plugin'));
 
 /********** Session **********/
 app.use(session({
@@ -30,14 +31,14 @@ app.use(session({
 })); // configuracion para el uso de sessiones
 
 /********** Middleware **********/
-app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.urlencoded({extended : true})); // permito el envio de parametros 
 app.use(bodyParser.json()); // declaro en el proyecto el uso de interfaces json
 
 
 
 /********** Routes **********/
 let router = require('./config/routes');  // llamo el archivo de rutas
-const { domainToUnicode } = require('url');
+// const { domainToUnicode } = require('url');
 app.use('/', router); 	// declaro el uso de mis rutas
 
 const PORT = process.env.APP_PORT || 3000; // puerto declarado en archivo .env

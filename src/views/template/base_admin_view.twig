@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{% block title %}Alejandro Sanchez Portfolio{% endblock %}</title>
+
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href='{{ baseUrl }}normalize/normalize.css' />        
+    <link rel="stylesheet" href='{{ baseUrl }}bootstrap/css/bootstrap.min.css' />           
+    <link rel="stylesheet" href='{{ baseUrl }}boxicons/css/boxicons.min.css' />       
+    <link rel="stylesheet" href='{{ baseUrl }}scrollbar/jquery.mCustomScrollbar.css' />       
+    <link rel="stylesheet" href="{{ baseUrl }}css/admin/master.css">
+    {% block stylesheets %}{% endblock %}
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        {% block menu %}
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <img class="logo" src="{{ baseUrl }}img/admin/logoAdmin.png" alt="">
+            </div>
+
+            <ul class="list-unstyled components">
+                {# <p>Panel de control</p> #}
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Landing</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Inicio</a>
+                        </li>
+                        <li>
+                            <a href="#">Servicios</a>
+                        </li>
+                        <li>
+                            <a href="#">Portfolio</a>
+                        </li>
+                        <li>
+                            <a href="#">Recomendaciones</a>
+                        </li>
+                        <li>
+                            <a href="#">Pie de pagina</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Redes Sociales</a>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Portfolio</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+
+            <span class="version" >Version: 1.0.0</span>
+            
+        </nav>
+        {% endblock %}
+        <!-- Page Content  -->
+        <div id="content">
+            <div class="content-hamburger">
+                <div class="hamburger" id="sidebarCollapse">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="container-fluid mt-3">
+                <div class="row">
+                    {% block body %}
+                        
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script  type="text/javascript">
+        const BASEURL = '{{ baseUrl }}';
+    </script>
+    <script  type="text/javascript" src="{{ baseUrl }}jquery/jquery.min.js" ></script>
+    <script  type="text/javascript" src="{{ baseUrl }}popper/popper.min.js" ></script>
+    <script  type="text/javascript" src="{{ baseUrl }}bootstrap/js/bootstrap.min.js" ></script>
+    <script  type="text/javascript" src="{{ baseUrl }}scrollbar/jquery.mCustomScrollbar.concat.min.js" ></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                $("#sidebarCollapse").toggleClass('open');
+                $('#sidebar, #content').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+
+
+            setInterval("mueveReloj()",1000)
+        });
+
+        function mueveReloj(){
+            let dias    = ["Domingo","Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+            let meses   = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+            let elemHr =  document.querySelector(".horafull")
+            let elemStrDate =  document.querySelector(".strFullDate")
+            
+            let dateObj = new Date()
+            let year    = dateObj.getFullYear()
+            let month   = dateObj.getMonth()
+            let date    = dateObj.getDate() 
+            let day     = dateObj.getDay()
+            let hora    = (dateObj.getHours().toString().length == 1)?  "0"+dateObj.getHours() : dateObj.getHours();
+            let minuto  = (dateObj.getMinutes().toString().length == 1)?  "0"+dateObj.getMinutes() : dateObj.getMinutes()
+            // let segundo = dateObj.getSeconds()
+
+            let horafull = `${hora}:${minuto}`;
+            let strDate =`${dias[day]}, ${date} de ${meses[month]} de  ${year}.`;
+
+            elemHr.innerHTML= horafull
+            elemStrDate.innerHTML= strDate
+        }
+    </script>
+        {% block javascripts %}{% endblock %}
+</body>
+
+</html>

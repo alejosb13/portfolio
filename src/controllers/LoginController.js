@@ -1,20 +1,20 @@
 'use strict'
 
+// const path = require('path') 
+
 /******************** Models ********************/
 const UserModel = require('../models/UserModel') 
 
-
 /******************** Helpers ********************/
-// const AppHelper = require('../helpers/appHelper') 
+const AppHelper = require('../helpers/AppHelper') 
 
 
 class LoginController {
-//   constructor() {}
-
-    index = (req, res)=>{
-        UserModel.getAll((error,result)=>{
-            res.render('admin/login_view');
-        })
+    index(req, res){
+        console.log("asd : "+ AppHelper.getUrl(req,"baseUrlPath"));
+        res.render('admin/login_view',{
+            baseUrl: AppHelper.getUrl(req,"baseUrlPath"),
+        });
     }
 
     auth(req, res){
@@ -48,20 +48,8 @@ class LoginController {
 
     logOut(req, res){
         req.session.destroy((err) => {
-            res.redirect('/') // will always fire after session is destroyed
+            res.redirect('/admin') // will always fire after session is destroyed
         })
-    }
-
-    home(req, res){
-        let data = {}
-        if(!req.session.loggedin){
-            res.redirect('admin/');
-        }
-
-        res.render('admin/home_view',{
-            username: req.session.username,
-        });
-
     }
 
 }

@@ -1,11 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Bienvenido {{username}}</h1>
-</body>
-</html>
+{% extends '../template/base_admin_view.twig' %}
+
+{% block body %}
+<div class="col-md-8 mb-3 ">
+    <div class="card h-md-100">
+        <div class="card-body pt-2">
+            <div class="row no-gutters h-100 align-items-center">
+                <div class="col">
+                    <div class="media align-items-center">
+                        <div class="media-body">
+                            <h4 class="mb-2 ">¡Bienvenido al administrador de contenido!</h4>
+                            <div class="fs--2 font-weight-semi-bold">
+                                <span class="descipcion"> En este panel podras Realizar modificaciones en la configuracion de tu sitio o de paginas que realices. </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-4  mb-3 ">
+    <div class="card h-md-100">
+        <div class="card-header d-flex flex-between-center pb-0">
+            <h6 class="mb-0">Horario</h6>
+        </div>
+        <div class="card-body pt-2">
+            <div class="row no-gutters h-100 align-items-center">
+                <div class="col">
+                    <div class="media align-items-center">
+                        <i class='bx bx-time pr-3' style="color: #17a2b8;font-size: 54px;"></i>
+                        <div class="media-body">
+                            <h6 class="mb-2 horafull"></h6>
+                            <div class="fs--2 font-weight-semi-bold">
+                                <span class="strFullDate"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
