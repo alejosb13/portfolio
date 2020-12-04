@@ -58,6 +58,39 @@ class LandingController {
         }
      
     }
+
+    async deleteKeyword (req,res) { 
+        try {
+            let request = {status:false}
+
+            // console.log(req.session);
+            // if(!req.session.loggedin){
+            //     res.redirect('/admin');
+            // }
+            if(req.body.id){
+                let data = {
+                    id : req.body.id,
+                }
+    
+                let result = await LandingModel.deleteKeywords(data);
+                // console.log(result);
+    
+                // if(result){
+                //     let datainsert = await LandingModel.getKeywords(result.insertId);
+                    
+                //     request.data   = datainsert
+                //     request.status = true
+                // }
+                if(result) request.status = true
+            }
+            
+            // console.log(request);
+            res.json(request)
+        } catch (err) {
+            console.log(err);
+        }
+     
+    }
 }
  
 module.exports = new LandingController();

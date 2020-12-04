@@ -1,22 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('formKeyword').addEventListener('submit', setKeyword);
-    // setKeyword2()
+    
+    
+    let elementDeleteNodeList = document.querySelectorAll("[data-item-keyword]")
+    if( elementDeleteNodeList.length > 0){
+        let elementDelete = Array.from(elementDeleteNodeList)
+        elementDelete.map((element)=>{
+            element.addEventListener('click', deleteKeyword);
+        })
+    }
+
 });
 
 
-function setKeyword2(event) {
-    event.preventDefault();
-
-    console.log("asfas");
-}
-
 async function setKeyword(event) {
     event.preventDefault();
-
+    let keyword = document.querySelector("#formKeyword input[name='keyword']").value
     let url = BASEURL + 'admin/landing/inicio/setkeywords';
     var data = {
-        keytext: 'test',
-        section: '1',
+        keytext: keyword,
+        section: 1,
     };
 
     let response = await fetch(url, {
@@ -27,10 +30,33 @@ async function setKeyword(event) {
             'Content-Type': 'application/json'
         }
     });
-    let pokemon = await response.json();
-    console.log(pokemon);
-    // .then(res => res.json())
-    // .catch(error => console.error('Error:', error))
-    // .then(response => console.log('Success:', response));
-    // log.textContent = `Form Submitted! Time stamp: ${event.timeStamp}`;
+    let respuesta = await response.json();
+    if(respuesta.status){
+        location.reload();
+    }
+
+}
+
+async function deleteKeyword(event) {
+    // event.preventDefault();
+    value = event.target.dataset.itemKeyword
+    // console.log(value);
+
+    let url = BASEURL + 'admin/landing/inicio/deletekeywords';
+    var data = {
+        id: value,
+    };
+
+    let response = await fetch(url, {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(data), 
+    // data can be `string` or {object}!
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    });
+    let respuesta = await response.json();
+    if(respuesta.status){
+        location.reload();
+    }
 }

@@ -17,6 +17,7 @@ router.get('/admin/home', AdminController.index);
 
 router.get('/admin/landing/inicio', LandingController.inicio);
 router.post('/admin/landing/inicio/setkeywords', LandingController.setKeyword);
+router.post('/admin/landing/inicio/deletekeywords', LandingController.deleteKeyword);
 
 // router.post('/', LoginController.autentication);
 

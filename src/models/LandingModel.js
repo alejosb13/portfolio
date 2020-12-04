@@ -20,7 +20,7 @@ class LandingModel {
     
     getKeywordsInicio(){
         return new Promise(function(resolve, reject) {
-            dbConn.query("SELECT kw.id,kw.key FROM landing_inicio li INNER JOIN keywords kw ON li.id_section_key = kw.section WHERE li.`status` = 1 AND kw.`status` = 1", function (err, result) {
+            dbConn.query("SELECT kw.id,kw.keyword FROM landing_inicio li INNER JOIN keywords kw ON li.keyword_section = kw.keyword_section WHERE li.`status` = 1 AND kw.`status` = 1", function (err, result) {
                 if (err) reject(err);
 
                 resolve(JSON.parse(JSON.stringify(result)));
@@ -32,6 +32,23 @@ class LandingModel {
         return new Promise(function(resolve, reject) {
             dbConn.query("INSERT INTO keywords VALUES (NULL,?,?,1)",[data.keytext,data.section],(err, result) => {
                 // console.log(result);
+                if (err){
+                    // console.log(err);
+                    // response(false);
+                    reject(false);
+                }else{
+                    // response({ status:true })
+                    resolve(JSON.parse(JSON.stringify(result)))
+                }
+            });
+
+        });
+    }
+
+    deleteKeywords(data){
+        return new Promise(function(resolve, reject) {
+            dbConn.query("DELETE FROM keywords WHERE id = ? AND status = 1 ",[data.id],(err, result) => {
+                console.log(result);
                 if (err){
                     // console.log(err);
                     // response(false);
