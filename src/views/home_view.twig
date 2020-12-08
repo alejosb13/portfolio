@@ -4,12 +4,12 @@
 {# {% block menu %}{% endblock %} sin menu #}
 
 {% block body %}
-<section class="one banner" id="home">
+<section class="one banner" id="home" style="background-image: url(../img/{{ dataInicio.img_name }});">
     <div class="conten-text container">
-        <h1>Alejandro Sanchez</h1>
+        <h1>{{ dataInicio.title }}</h1>
         <p>
-            I'm
-            <span class="element" id="text-type"></span>
+            {{ dataInicio.subtitle }}
+            <span class="element" id="text-type" data-text-type="{{ keywords }}"></span>
         </p>
         <div class="social-links">
             <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>

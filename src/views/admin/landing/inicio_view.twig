@@ -58,22 +58,32 @@
                 <div class="col">
                     <div class="media align-items-center">
                         <div class="media-body">
-                            <form _lpchecked="1">
+                            <form id="formdatainicio">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" required="required" name="titulo" value="{{ dataInicio.titulo }}">
+                                            <input type="text" id="title" required="required" name="titulo" value="{{ dataInicio.title }}">
                                             <label for="input" class="control-label">Titulo</label><i class="bar"></i>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" required="required" name="subtitulo" value="{{ dataInicio.subtitulo }}">
+                                            <input type="text" id="subtitle" required="required" name="subtitulo" value="{{ dataInicio.subtitle }}">
                                             <label for="input" class="control-label">Subtitulo</label><i class="bar"></i>
                                         </div>
                                     </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mt-0">
+                                            <h5 class="mb-0">Banner</h5>
+                                            <img src="{{ baseUrl ~ "img/uploads/" ~ dataInicio.img_name }}" class="img-banner" alt="">
+                                            <label class='__lk-fileInput'>
+                                                <span data-default='Selecciona una imagen'>Selecciona una imagen</span>
+                                                <input type="file" id="image">
+                                            </label>
+                                        </div>
+                                    </div>
                                     <div class="col-md-5 self-center m-auto">
-                                        <button type="button" name="" id="" class="btn btn-info btn-block">Modificar</button>
+                                        <button type="submit" name="" id="" class="btn btn-info btn-block">Modificar</button>
                                     </div>
                                 </div>
                             </form>
@@ -128,8 +138,31 @@
     </div>
 </div>
 
+
 {% endblock %}
 
     {% block javascripts %}
-        <script  type="text/javascript" src="{{ baseUrl }}js/landing.js" ></script>
+        <script  type="text/javascript" src="{{ baseUrl }}js/landing/inicio.js" charset="UTF-8" ></script>
+        <script  type="text/javascript" >
+        $(function(){  
+  $('input').change(function(){
+    var label = $(this).parent().find('span'); 
+    if(typeof(this.files) !='undefined'){ // fucking IE      
+      if(this.files.length == 0){
+        label.removeClass('withFile').text(label.data('default'));
+      }else{
+        var file = this.files[0]; 
+        var name = file.name;
+        var size = (file.size / 1048576).toFixed(3); //size in mb 
+        label.addClass('withFile').html(name + ' (' + size + 'mb)'+'<i class="bx bx-x"></i>');
+      }
+    }
+    else{
+      var name = this.value.split("\\");
+	      label.addClass('withFile').html(name[name.length-1]+'<i class="bx bx-x"></i>');
+    }
+    return false;
+  });  
+});
+        </script>
     {% endblock %}

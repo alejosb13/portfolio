@@ -72,6 +72,24 @@ class LandingModel {
         });
     }
 
+    setinicio(data){
+        return new Promise(function(resolve, reject) {
+            
+            let query ="UPDATE landing_inicio SET title = ?, subtitle = ?"
+            let values = [data.title, data.subtitle, data.img_name];
+            if(data.img_name){
+                query       += ",  img_name = ?"
+                values.push =  data.img_name
+            } 
+
+            dbConn.query(query,values, function (err, result) {
+                if (err) reject(err);
+
+                resolve(JSON.parse(JSON.stringify(result)));
+            });
+        });
+    }
+
 }
 
 

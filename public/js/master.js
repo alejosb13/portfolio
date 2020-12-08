@@ -1,7 +1,4 @@
 $(document).ready(function () {
-	// $('#sidebarCollapse').on('click', function () {
-	// 	$('#sidebar').toggleClass('active');
-	// });
 	$(document).on("scroll", onScroll);
 	menu_animation()
 	textType()
@@ -38,12 +35,11 @@ function menu_animation() {
 }
 
 function textType() {
+	let elementKeywords = document.querySelector("[data-text-type]")
+	let keywords = elementKeywords.dataset.textType.split(",")
+	
 	new Typed('#text-type', {
-		strings: [
-			"Web Developer",
-			"Front-End Developer",
-			"Back-End Developer"
-		],
+		strings: keywords,
 		typeSpeed: 130,
 		backSpeed: 0,
 		fadeOut: true,

@@ -26,3 +26,9 @@
     width: 100%;
 }
 
+.img-banner{
+    width: 100%;
+    max-width: 560px;
+    display: block;
+    margin: 20px 0px;
+}

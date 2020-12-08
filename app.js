@@ -1,8 +1,10 @@
 let express     = require('express');
+let fileUpload  = require ('express-fileupload') ; 
 let session     = require('express-session');
 let bodyParser  = require('body-parser');
 let path        = require('path');
 let app 		= express();
+
 
 require('dotenv').config() // leer datos de archivo .env
 require('./config/database') // Conexion con base de datos 
@@ -22,6 +24,7 @@ app.use('/velocity', express.static(__dirname + '/node_modules/velocity-animate'
 app.use('/typed', express.static(__dirname + '/node_modules/typed.js/lib'));
 app.use('/boxicons', express.static(__dirname + '/node_modules/boxicons'));
 app.use('/scrollbar', express.static(__dirname + '/node_modules/malihu-custom-scrollbar-plugin'));
+app.use('/sweetalert', express.static(__dirname + '/node_modules/sweetalert/dist'));
 
 /********** Session **********/
 app.use(session({
@@ -33,6 +36,8 @@ app.use(session({
 /********** Middleware **********/
 app.use(bodyParser.urlencoded({extended : true})); // permito el envio de parametros 
 app.use(bodyParser.json()); // declaro en el proyecto el uso de interfaces json
+
+app.use(fileUpload());
 
 
 

@@ -4,7 +4,10 @@
 const LandingModel = require('../../models/LandingModel') 
 
 /******************** Helpers ********************/
-const AppHelper = require('../../helpers/AppHelper') 
+const AppHelper   = require('../../helpers/AppHelper') 
+const path        = require('path');
+const mime        = require('mime');
+const fs            = require('fs');
 
 class LandingController {
     async inicio(req,res) { 
@@ -90,6 +93,55 @@ class LandingController {
             console.log(err);
         }
      
+    }
+
+    async updateData (req,res) { 
+            // console.log(req.session);
+            // if(!req.session.loggedin){
+            //     res.redirect('/admin');
+            // }
+        // console.log(req.files);
+        let cantidad  = 0 
+        let filevalue      = req.files
+        let data = {
+            title: req.body.title,
+            subtitle: req.body.subtitle,
+        }
+        // console.log(filevalue);
+        if(filevalue){
+            let file      = filevalue.file
+            let extencion = mime.getExtension(file.mimetype);
+            let nameFile  = "banner_inicio"
+            
+            while (true) {
+                // console.log("a");
+                if(cantidad !== 0) nameFile = `banner_inicio(${cantidad})`
+                
+                let existFile = fs.existsSync(path.join(__dirname,`../../../public/img/uploads/${nameFile}.${extencion}`))
+                if(existFile){
+                    cantidad++
+                }else{
+                    file.mv(path.join(__dirname,`../../../public/img/uploads/${nameFile}.${extencion}`),err => {
+                        if(err) return res.status(500).send({ message : err })
+                        // return res.status(200).send({ message : 'File upload' })
+                    })
+                    break;
+                }
+            }
+            
+            data.img_name= `${nameFile}.${extencion}`
+        }
+
+        
+        try {
+
+            let result = await LandingModel.setinicio(data);
+            console.log(result);
+        } catch (err) {
+            console.log(err);
+        }
+
+        return res.status(200).send({ status : true })
     }
 }
  
