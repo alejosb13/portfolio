@@ -15,7 +15,7 @@ User.getAll = (result) => {
  * @param {object} result callback
  */
 User.getUser = (data, result) => {
-    dbConn.query("SELECT * FROM accounts WHERE username = ? AND password = ?",[data.username, data.password],(err, res) => {
+    dbConn.query("SELECT * FROM users WHERE username = ? AND password = ?",[data.username, data.password],(err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
