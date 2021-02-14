@@ -35,7 +35,7 @@ class ServicesModel {
 
             dbConn.query(query,values, function (err, result) {
                 if (err) reject(err);
-console.log(err);
+                // console.log(err);
                 resolve(JSON.parse(JSON.stringify(result)));
             });
         });

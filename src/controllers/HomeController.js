@@ -4,7 +4,7 @@
 const {recommendations} = require('../../config/config') 
 
 /******************** Models ********************/
-const LandingModel = require('../models/BannerModel') 
+const BannerModel = require('../models/BannerModel') 
 
 /******************** Helpers ********************/
 // const AppHelper = require('../helpers/appHelper') 

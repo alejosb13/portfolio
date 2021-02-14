@@ -126,7 +126,7 @@
         <script  type="text/javascript" src="{{ baseUrl }}js/landing/service.js" charset="UTF-8" ></script>
         <script  type="text/javascript" >
         $(function(){  
-            $('input').change(function(){
+            $("input[tipe='file']").change(function(){
                 var label = $(this).parent().find('span'); 
                 if(typeof(this.files) !='undefined'){ // fucking IE      
                     if(this.files.length == 0){
