@@ -248,6 +248,7 @@ margin-top: 40px;
     transform-style: preserve-3d;
     transform-origin: center right;
     transition: transform 1s;
+    border: none;
 }
 
 .flip .conten-flip .scene .card.is-flipped {
@@ -272,6 +273,7 @@ margin-top: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 6px;
 }
 .flip .conten-flip .scene .card .card__face.card__face--front .flip-content-text {
     background: #f1ececdd;
@@ -280,7 +282,7 @@ margin-top: 40px;
     font-family: "Poppins", sans-serif;
 }
 .flip .conten-flip .scene .card .card__face.card__face--back {
-    background: blue;
+    /* background: blue; */
     transform: rotateX(180deg);
 }
 .flip .conten-flip .scene .card .card__face.card__face--back .flip-content-text {
@@ -293,6 +295,7 @@ margin-top: 40px;
     justify-content: center;
     height: 100%;
     align-items: center;
+    border-radius: 6px;
 }
 
 .flip .conten-flip .scene .card .card__face.card__face--back .flip-content-text .services-list-icon {

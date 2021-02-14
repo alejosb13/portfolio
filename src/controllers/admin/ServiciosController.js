@@ -1,7 +1,7 @@
 'use strict'
 
 /******************** Models ********************/
-const BannerModel = require('../../models/BannerModel') 
+const ServicesModel = require('../../models/ServicesModel') 
 
 /******************** Helpers ********************/
 const AppHelper   = require('../../helpers/AppHelper') 
@@ -9,56 +9,68 @@ const path        = require('path');
 const mime        = require('mime');
 const fs            = require('fs');
 
-class BannerController {
-    async inicio(req,res) { 
+class ServiciosController {
+    async index(req,res) { 
         let data = {}
         // console.log(req.session);
         // if(!req.session.loggedin){
         //     res.redirect('/admin');
         // }
 
-        let dataInicio          = await BannerModel.getDataInicio();
-        let dataKeywordsInicio  = await BannerModel.getKeywordsInicio();
+        data.servicios = await ServicesModel.getServices();
+        data.username  = req.session.username;
+        data.baseUrl   = AppHelper.getUrl(req,"baseUrl");
+        
+        // console.log(data.services);
 
-        res.render('admin/landing/inicio_view',{
-            username: req.session.username,
-            baseUrl: AppHelper.getUrl(req,"baseUrl"),
-            dataInicio,
-            dataKeywordsInicio
-        });
+        res.render('admin/landing/servicios_view', data);
     }
 
-    async setKeyword (req,res) { 
-        try {
-            let request = {status:false}
-
-            // console.log(req.session);
-            // if(!req.session.loggedin){
-            //     res.redirect('/admin');
-            // }
-            if(req.body.keytext && req.body.section){
-                let data = {
-                    keytext : req.body.keytext,
-                    section : req.body.section
-                }
-    
-                let result = await BannerModel.setKeywords(data);
-                // console.log(result);
-    
-                if(result){
-                    let datainsert = await BannerModel.getKeywords(result.insertId);
+    async setService (req,res) { 
+        // try {
+            let {title,texto,servicio,icono} = req.body
+            let cantidad  = 0 
+            let filevalue = req.files
+            let data = {
+                title,
+                texto,
+                servicio,
+                icono,
+            };
+console.log(filevalue);
+            if(filevalue){
+                let file      = filevalue.file
+                let extencion = mime.getExtension(file.mimetype);
+                let nameFile  = "services"+servicio
+                
+                while (true) {
+                    // console.log("a");
+                    if(cantidad !== 0) nameFile = `services${servicio}(${cantidad})`
                     
-                    request.data   = datainsert
-                    request.status = true
+                    let existFile = fs.existsSync(path.join(__dirname,`../../../public/img/uploads/servicios/${nameFile}.${extencion}`))
+
+                    if(existFile){
+                        cantidad++
+                    }else{
+                        file.mv(path.join(__dirname,`../../../public/img/uploads/servicios/${nameFile}.${extencion}`),err => {
+                            if(err) return res.status(500).send({ message : err })
+                            // return res.status(200).send({ message : 'File upload' })
+                        })
+                        break;
+                    }
                 }
-                // if(result) res.json(result)
+                
+                data.img_name= `${nameFile}.${extencion}`
             }
-            
-            console.log(request);
-            res.json(request)
-        } catch (err) {
-            console.log(err);
-        }
+
+            try {
+                let result = await ServicesModel.setService(data);
+                console.log(result);
+            } catch (err) {
+                console.log(err);
+            }
+    
+            return res.status(200).send({ status : true })
      
     }
 
@@ -145,4 +157,4 @@ class BannerController {
     }
 }
  
-module.exports = new BannerController();
+module.exports = new ServiciosController();

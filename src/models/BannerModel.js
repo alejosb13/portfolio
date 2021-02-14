@@ -6,7 +6,7 @@ var dbConn = require('../../config/database')
 // const AppHelper = require('../helpers/appHelper') 
 
 
-class LandingModel {
+class BannerModel {
 
     getDataInicio(){
         return new Promise(function(resolve, reject) {
@@ -94,4 +94,4 @@ class LandingModel {
 
 
 
-module.exports = new LandingModel();
+module.exports = new BannerModel();
