@@ -26,8 +26,10 @@ router.post('/admin/landing/inicio/updatedata', BannerController.updateData);
 router.get('/admin/landing/servicios', ServiciosController.index);
 router.post('/admin/landing/servicios/update', ServiciosController.setService);
 
+// Projects
+router.get('/admin/landing/servicios', ServiciosController.index);
 
-// router.post('/', LoginController.autentication);
-
+// Landing
 router.get('/',HomeController.index);
+
 module.exports = router;

@@ -268,7 +268,7 @@ margin-top: 40px;
 }
 .flip .conten-flip .scene .card .card__face.card__face--front {
     background-color: #ccc;
-    background-image: url(https://www.beingeorge.com/justin/Light/assets/images/services2.jpg);
+   /* background-image: url(https://www.beingeorge.com/justin/Light/assets/images/services2.jpg); */
     background-size: cover;
     display: flex;
     align-items: center;
