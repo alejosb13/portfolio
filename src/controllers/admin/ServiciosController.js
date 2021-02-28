@@ -1,39 +1,40 @@
 'use strict'
 
 /******************** Models ********************/
-const ServicesModel = require('../../models/ServicesModel') 
+const { Section_Service }  = require('../../models')
+
 
 /******************** Helpers ********************/
 const AppHelper   = require('../../helpers/AppHelper') 
 const path        = require('path');
 const mime        = require('mime');
-const fs            = require('fs');
+const fs          = require('fs');
 
 class ServiciosController {
     async index(req,res) { 
-        let data = {}
-        // console.log(req.session);
-        // if(!req.session.loggedin){
-        //     res.redirect('/admin');
-        // }
-
-        data.servicios = await ServicesModel.getServices();
-        data.username  = req.session.username;
-        data.baseUrl   = AppHelper.getUrl(req,"baseUrl");
         
-        // console.log(data.services);
+        // AppHelper.ValidLogin(req.session,res)
+
+
+        let data = {}
+            
+        data.baseUrl   = AppHelper.getUrl(req,"baseUrl");
+        data.username  = req.session.username;
+        data.servicios = await Section_Service.All();
 
         res.render('admin/landing/servicios_view', data);
     }
 
     async setService (req,res) { 
-        let {title,texto,servicio,icono} = req.body
+        // AppHelper.ValidLogin(req.session,res)
+
+        let request= {}
+        let { title,texto,servicio,icono } = req.body
         let cantidad  = 0 
         let filevalue = req.files
         let data = {
-            title,
+            titulo : title,
             texto,
-            servicio,
             icono,
         };
 
@@ -57,18 +58,27 @@ class ServiciosController {
                     break;
                 }
             }
-            data.img_name= `${nameFile}.${extencion}`
+            data.img_name = `${nameFile}.${extencion}`
         }
 
         try {
-            let result = await ServicesModel.setService(data);
-            console.log(result);
-            return res.json({ status : true })
+
+            let result = await Section_Service.update(data, {
+                where: {
+                  id: servicio
+                }
+            });
+
+            if(result) request.status = true
+        
         } catch (err) {
+        
             console.log(err);
-            return res.json({ status : false })
+            request.status = false
+
         }
 
+        return res.json(request)
     }
 
   

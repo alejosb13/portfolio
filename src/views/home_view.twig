@@ -4,11 +4,12 @@
 {# {% block menu %}{% endblock %} sin menu #}
 
 {% block body %}
-<section class="one banner" id="home" style="background-image: url('../img/uploads/{{ dataInicio.img_name }}');">
+<section class="one banner" id="home" style="background-image: url('../img/uploads/{{ BannerInicio.img_name }}');">
     <div class="conten-text container">
-        <h1>{{ dataInicio.title }}</h1>
+   
+        <h1>{{ BannerInicio.title }}</h1>
         <p>
-            {{ dataInicio.subtitle }}
+            {{ BannerInicio.subtitle }}
             <span class="element" id="text-type" data-text-type="{{ keywords }}"></span>
         </p>
         <div class="social-links">
@@ -23,11 +24,11 @@
     <h2>MY SERVICES</h2>
     <div class="conten-flip container" id="comten-scene">
         <div class="row">
-            {% for servicio in servicios %}
+            {% for servicio in Servicios %}
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="scene scene--card">
                     <div class="card card-event-flip" >
-                        <div class="card__face card__face--front" style="background-image: url('../img/uploads/servicios/{{ servicio.img }}');">
+                        <div class="card__face card__face--front" style="background-image: url('../img/uploads/servicios/{{ servicio.img_name }}');">
                             <div class="flip-content-text">
                                 <h5 class="mb-0">{{ servicio.titulo }}</h5>
                             </div>

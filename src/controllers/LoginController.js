@@ -3,7 +3,8 @@
 // const path = require('path') 
 
 /******************** Models ********************/
-const UserModel = require('../models/UserModel') 
+const { User }  = require('../models')
+
 
 /******************** Helpers ********************/
 const AppHelper = require('../helpers/AppHelper') 
@@ -11,39 +12,50 @@ const AppHelper = require('../helpers/AppHelper')
 
 class LoginController {
     index(req, res){
-        console.log("asd : "+ AppHelper.getUrl(req,"baseUrlPath"));
+
         res.render('admin/login_view',{
             baseUrl: AppHelper.getUrl(req,"baseUrlPath"),
         });
     }
 
-    auth(req, res){
-        let data = {
-            username : req.body.username,
-            password : req.body.password
-        }
+    async auth(req, res){
+        let { username,password } = req.body
+        let request = {
+            valid:false,
+            error:false
+        };
 
-        if(data.username && data.password){
-            UserModel.getUser(data,(err,result)=>{
-                let json = {}
+        if(username && password){
 
-                if(result.length > 0){
+            try {
+                let user = await User.findAll({
+                    where: {
+                        username,
+                        password,
+                        status:1
+                    },
+                    raw: true 
+                });
+
+                if(user.length > 0){
                     req.session.loggedin = true;
-                    req.session.username = data.username;
-                    
-                    json.error  = false;
-                    // json.data   = result;
-                    json.valid   = true;
-                }else{
-                    json.error    = false;
-                    json.valid    = false;
-                    json.message  = "Usuario o Contraseña son incorrectos.";
+                    req.session.username = username;
 
-                    // json.data   = {};
+                    request.valid   = true;
+                }else{
+                    request.message  = "Usuario o Contraseña son incorrectos.";
                 }
-                res.json(json)
-            })
+
+            } catch (error) {
+
+                console.log(error);
+                request.message  = "¡Error!";
+            }
+
+            
         }
+
+        res.json(request)
     }
 
     logOut(req, res){

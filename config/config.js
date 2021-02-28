@@ -1,10 +1,4 @@
 const Appconfig = {
-    db: {
-        DB_HOST     : process.env.DB_HOST     || "localhost",
-        DB_USER     : process.env.DB_USER     || "root",
-        DB_PASSWORD : process.env.DB_PASSWORD || "",
-        DB_NAME     : process.env.DB_NAME     || "dbname",
-    },
     api: {
         linkedin: {
             // client_iD     : "78n5vtm33criv3",

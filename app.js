@@ -7,7 +7,8 @@ let app 		= express();
 
 
 require('dotenv').config() // leer datos de archivo .env
-require('./config/database') // Conexion con base de datos 
+// require('./config/database') // Conexion con base de datos 
+const { connection } = require('./database/db') // Conexion con base de datos 
 
 
 /********** View Config Twig **********/
@@ -37,6 +38,7 @@ app.use(session({
 app.use(bodyParser.urlencoded({extended : true})); // permito el envio de parametros 
 app.use(bodyParser.json()); // declaro en el proyecto el uso de interfaces json
 
+// configuro la carga de archivos de manera global
 app.use(fileUpload());
 
 
@@ -47,5 +49,19 @@ let router = require('./config/routes');  // llamo el archivo de rutas
 app.use('/', router); 	// declaro el uso de mis rutas
 
 const PORT = process.env.APP_PORT || 3000; // puerto declarado en archivo .env
-app.listen(PORT, () => console.log(`http://localhost:${PORT}/`)); // retorno url con puerto
-// app.listen(3001);
+
+app.listen(PORT, ()=> {
+	
+	console.log(`http://localhost:${PORT}/`)// retorno url con puerto
+
+	// conexion a base de datos
+	let dbConnection = connection.sync().then(()=>{ 
+		console.log("conexion Exitosa nueva");
+	})
+
+	dbConnection.catch(function(e) {
+		console.log("revisar conexion con la base de datos o encenderla");
+		// console.log(e); // Nunca será llamado
+	 });
+
+}); 

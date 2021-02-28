@@ -1,32 +1,23 @@
 'use strict'
 
 /******************** Config ********************/
-const {recommendations} = require('../../config/config') 
+const { recommendations } = require('../../config/config') 
 
 /******************** Models ********************/
-const BannerModel = require('../models/BannerModel') 
-const ServicesModel    = require('../models/ServicesModel') 
-
-/******************** Helpers ********************/
-// const AppHelper = require('../helpers/appHelper') 
-
+const { Section_Inicio, Section_Service }  = require('../models')
 
 class HomeController {
-//   constructor() {}
 
-  async index(req, res) {
-    let dataInicio  = await BannerModel.getDataInicio()
-    let keywords    = await BannerModel.getKeywordsInicio()
-    let servicios   = await ServicesModel.getServices()
-    let keywordText = keywords.map( (val)=> val.keyword )
-
-    res.render('home_view.twig',{
-       recommendations,
-       dataInicio,
-       servicios,
-       keywords: keywordText.join(),
-    });
-  }
+    async index(req, res) {
+        let data = {};
+        
+        data.recommendations = recommendations
+        data.BannerInicio    = await Section_Inicio.All()
+        data.keywords        = await Section_Inicio.BannerKeywords()
+        data.Servicios       = await Section_Service.All();
+        
+        res.render('home_view.twig', data );
+    }
 }
 
 

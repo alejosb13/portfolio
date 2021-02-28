@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return val.addEventListener('submit', setServices);
         
     }) 
-
+    
+    fileUpload()
 
 });
 

@@ -23,10 +23,21 @@ Crear un archivo .env en el directorio raíz con las siguientes variables:
 - DB_NAME       -> ej: base_project
 - APP_PORT      -> ej: 3001
 
-## Correr el proyecto en desarrollo
-
+## Iniciar el servidor en desarrollo
     $ npm run desarrollo
 
-## Correr el proyecto en desarrollo
+
+## Iniciar el servidor en Produccion
 
     $ npm run produccion
+## Pasos Generar crear Base de datos, Tablas y datos 
+
+### Paso 1: Crear base de datos
+- npx sequelize-cli db:create
+
+### Paso 2: Ejecutar Migracion
+- npx sequelize-cli db:migrate
+
+### Paso 3: Ejecutar Seeders
+- npx sequelize-cli db:seed:all
+

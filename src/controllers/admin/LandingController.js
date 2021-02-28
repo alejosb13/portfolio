@@ -1,123 +1,109 @@
 'use strict'
 
-/******************** Models ********************/
-const BannerModel = require('../../models/BannerModel') 
+/* ******************* Models ******************* */
+const { Section_Inicio, Keyword }  = require('../../models')
 
-/******************** Helpers ********************/
+/* ******************* Helpers ******************* */
 const AppHelper   = require('../../helpers/AppHelper') 
 const path        = require('path');
 const mime        = require('mime');
-const fs            = require('fs');
+const fs          = require('fs');
 
 class BannerController {
     async inicio(req,res) { 
         let data = {}
-        // console.log(req.session);
-        // if(!req.session.loggedin){
-        //     res.redirect('/admin');
-        // }
 
-        let dataInicio          = await BannerModel.getDataInicio();
-        let dataKeywordsInicio  = await BannerModel.getKeywordsInicio();
+        // AppHelper.ValidLogin(req.session,res)
 
-        res.render('admin/landing/inicio_view',{
-            username: req.session.username,
-            baseUrl: AppHelper.getUrl(req,"baseUrl"),
-            dataInicio,
-            dataKeywordsInicio
-        });
+
+        data.baseUrl     = AppHelper.getUrl(req,"baseUrl")
+        data.dataInicio  = await Section_Inicio.All();
+        data.keywords    = await Section_Inicio.BannerKeywordsArray();
+        data.username    = req.session.username;
+
+        res.render('admin/landing/inicio_view', data );
     }
 
     async setKeyword (req,res) { 
-        try {
-            let request = {status:false}
+    
+        // AppHelper.ValidLogin(req.session,res)
 
-            // console.log(req.session);
-            // if(!req.session.loggedin){
-            //     res.redirect('/admin');
-            // }
-            if(req.body.keytext && req.body.section){
-                let data = {
-                    keytext : req.body.keytext,
-                    section : req.body.section
-                }
-    
-                let result = await BannerModel.setKeywords(data);
-                // console.log(result);
-    
-                if(result){
-                    let datainsert = await BannerModel.getKeywords(result.insertId);
-                    
-                    request.data   = datainsert
-                    request.status = true
-                }
-                // if(result) res.json(result)
+
+        let request = {}
+        let { keytext,section } = req.body
+
+        if(keytext && section){
+            try{
+                await Keyword.create({
+                    keyword: req.body.keytext,
+                    keyword_section: req.body.section,
+                    status: 1
+                });
+
+                request.status = true
+                // request.data   =  dataIsert.toJSON();
+
+            } catch (err) {    
+                request.status = false
+                console.log(err);
             }
-            
-            console.log(request);
-            res.json(request)
-        } catch (err) {
-            console.log(err);
+
         }
-     
+
+        res.json(request)     
     }
 
     async deleteKeyword (req,res) { 
-        try {
-            let request = {status:false}
+        
+        // AppHelper.ValidLogin(req.session,res)
 
-            // console.log(req.session);
-            // if(!req.session.loggedin){
-            //     res.redirect('/admin');
-            // }
-            if(req.body.id){
-                let data = {
-                    id : req.body.id,
-                }
-    
-                let result = await BannerModel.deleteKeywords(data);
-                // console.log(result);
-    
-                // if(result){
-                //     let datainsert = await BannerModel.getKeywords(result.insertId);
-                    
-                //     request.data   = datainsert
-                //     request.status = true
-                // }
-                if(result) request.status = true
-            }
+        
+        let request = { status : false }
+        let { id } = req.body
+        
+        if(iid){
             
-            // console.log(request);
-            res.json(request)
-        } catch (err) {
-            console.log(err);
+            try {
+                await Keyword.destroy({
+                    where: {
+                        id
+                    }
+                });
+                
+                request.status = true
+                
+            } catch (err) {
+                console.log(err);
+            }
         }
+        
+        res.json(request)
      
     }
 
     async updateData (req,res) { 
-            // console.log(req.session);
-            // if(!req.session.loggedin){
-            //     res.redirect('/admin');
-            // }
-        // console.log(req.files);
+
+        // AppHelper.ValidLogin(req.session,res)
+
+        let { title,subtitle } = req.body
+        let request   = {} 
         let cantidad  = 0 
-        let filevalue      = req.files
+        let filevalue = req.files || false
         let data = {
-            title: req.body.title,
-            subtitle: req.body.subtitle,
+            title,
+            subtitle
         }
-        // console.log(filevalue);
+        
         if(filevalue){
             let file      = filevalue.file
             let extencion = mime.getExtension(file.mimetype);
             let nameFile  = "banner_inicio"
             
             while (true) {
-                // console.log("a");
                 if(cantidad !== 0) nameFile = `banner_inicio(${cantidad})`
                 
                 let existFile = fs.existsSync(path.join(__dirname,`../../../public/img/uploads/${nameFile}.${extencion}`))
+                
                 if(existFile){
                     cantidad++
                 }else{
@@ -125,23 +111,30 @@ class BannerController {
                         if(err) return res.status(500).send({ message : err })
                         // return res.status(200).send({ message : 'File upload' })
                     })
+
                     break;
                 }
             }
             
-            data.img_name= `${nameFile}.${extencion}`
+            data.img_name = `${nameFile}.${extencion}`
         }
 
-        
         try {
 
-            let result = await BannerModel.setinicio(data);
-            console.log(result);
+            let result = await Section_Inicio.update(data, {
+                where: {
+                  id: 1
+                }
+            });
+
+            if(result) request.status = true
+
         } catch (err) {
             console.log(err);
+            request.status = false
         }
 
-        return res.status(200).send({ status : true })
+        return res.json(request)
     }
 }
  

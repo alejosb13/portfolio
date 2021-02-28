@@ -63,16 +63,16 @@
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     {% for servicio in servicios %}
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link {% if loop.first %} active {% endif %}" id="service{{ servicio.id_service }}" data-toggle="tab" href="#servicetab{{ servicio.id_service }}" role="tab" aria-controls="servicetab{{ servicio.id_service }}" aria-selected="true">{{ servicio.titulo }}</a>
+                                            <a class="nav-link {% if loop.first %} active {% endif %}" id="service{{ servicio.id }}" data-toggle="tab" href="#servicetab{{ servicio.id }}" role="tab" aria-controls="servicetab{{ servicio.id }}" aria-selected="true">{{ servicio.titulo }}</a>
                                         </li>
                                     {% endfor %}
 
                                     </ul>
                                     <div class="tab-content" id="myTabContent">
                                     {% for servicio in servicios %}
-                                        <div class="tab-pane fade show {% if loop.first %} active {% endif %}" id="servicetab{{ servicio.id_service }}" role="tabpanel" aria-labelledby="service{{ servicio.id_service }}">
-                                            <form class="formservice" id="service{{ servicio.id_service }}" class="row">
-                                                <input type="hidden" id="nservicio" required="required" name="nservicio" value="{{ servicio.id_service }}">
+                                        <div class="tab-pane fade show {% if loop.first %} active {% endif %}" id="servicetab{{ servicio.id }}" role="tabpanel" aria-labelledby="service{{ servicio.id }}">
+                                            <form class="formservice" id="service{{ servicio.id }}" class="row">
+                                                <input type="hidden" id="nservicio" required="required" name="nservicio" value="{{ servicio.id }}">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <input type="text" id="title" required="required" name="titulo" value="{{ servicio.titulo }}">
@@ -94,7 +94,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group mt-0">
                                                         <h5 class="mb-0">Fondo</h5>
-                                                        <img src="{{ baseUrl ~ "img/uploads/servicios/" ~ servicio.img }}" class="img-banner" alt="">
+                                                        <img src="{{ baseUrl ~ "img/uploads/servicios/" ~ servicio.img_name }}" class="img-banner" alt="">
                                                         <label class='__lk-fileInput'>
                                                             <span data-default='Selecciona una imagen'>Selecciona una imagen</span>
                                                             <input type="file" id="image">
@@ -124,25 +124,4 @@
 
     {% block javascripts %}
         <script  type="text/javascript" src="{{ baseUrl }}js/landing/service.js" charset="UTF-8" ></script>
-        <script  type="text/javascript" >
-        $(function(){  
-            $("input[tipe='file']").change(function(){
-                var label = $(this).parent().find('span'); 
-                if(typeof(this.files) !='undefined'){ // fucking IE      
-                    if(this.files.length == 0){
-                        label.removeClass('withFile').text(label.data('default'));
-                    }else{
-                        var file = this.files[0]; 
-                        var name = file.name;
-                        var size = (file.size / 1048576).toFixed(3); //size in mb 
-                        label.addClass('withFile').html(name + ' (' + size + 'mb)'+'<i class="bx bx-x"></i>');
-                    }
-                }else{
-                    var name = this.value.split("\\");
-                    label.addClass('withFile').html(name[name.length-1]+'<i class="bx bx-x"></i>');
-                }
-                return false;
-            });  
-        });
-        </script>
     {% endblock %}

@@ -2,8 +2,8 @@ let express = require('express');
 let router  = express.Router();
 
 /******************** Controllers ********************/
-const LoginController       = require('../src/controllers/LoginController')
 const HomeController        = require('../src/controllers/HomeController')
+const LoginController       = require('../src/controllers/LoginController')
 const AdminController       = require('../src/controllers/admin/AdminController')
 const BannerController      = require('../src/controllers/admin/LandingController')
 const ServiciosController   = require('../src/controllers/admin/ServiciosController')
@@ -27,9 +27,10 @@ router.get('/admin/landing/servicios', ServiciosController.index);
 router.post('/admin/landing/servicios/update', ServiciosController.setService);
 
 // Projects
-router.get('/admin/landing/servicios', ServiciosController.index);
+// router.get('/admin/landing/servicios', ServiciosController.index);
 
 // Landing
 router.get('/',HomeController.index);
+
 
 module.exports = router;
