@@ -8,10 +8,12 @@ Este proyecto es una página web personal de tipo portafolio realizada con Nodej
 Para el desarrollo, solo necesitará Node.js, Mysql y configurar las variables de entorno que desea utilizar en un archivo .env . 
 
 ## Instalar
-
+    Nota: En el archivo package.json encontrara devDependencies (asegurese de instalarlas)
+```bash
     $ git clone https://github.com/alejosb13/portfolio.git
     $ cd portfolio
     $ npm install
+```
 
 ## Configurar
 
@@ -26,21 +28,31 @@ Crear un archivo .env en el directorio raíz con las siguientes variables:
 ```
 
 ## Iniciar el servidor en desarrollo
+
+```bash
     $ npm run desarrollo
+```
 
 
 ## Iniciar el servidor en Produccion
-
+```bash
     $ npm run produccion
+```
 ## Pasos Generar crear Base de datos, Tablas y datos 
 
 ### Paso 1: Crear base de datos
-- npx sequelize-cli db:create
+```bash
+    $ npx sequelize-cli db:create
+```
 
 ### Paso 2: Ejecutar Migracion
-- npx sequelize-cli db:migrate
+```bash
+    $ npx sequelize-cli db:migrate
+```
 
 ### Paso 3: Ejecutar Seeders
-- npx sequelize-cli db:seed:all
+```bash
+    $ npx sequelize-cli db:seed:all
+```
 
 
