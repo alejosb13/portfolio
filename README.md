@@ -17,11 +17,13 @@ Para el desarrollo, solo necesitará Node.js, Mysql y configurar las variables d
 
 Crear un archivo .env en el directorio raíz con las siguientes variables:
 
-    $ DB_HOST     : localhost
-    $ DB_USER     : root
-    $ DB_PASSWORD : 
-    $ DB_NAME     : base_project
-    $ APP_PORT    : 3001
+```bash
+    DB_HOST     : localhost
+    DB_USER     : root
+    DB_PASSWORD : 
+    DB_NAME     : base_project
+    APP_PORT    : 3001
+```
 
 ## Iniciar el servidor en desarrollo
     $ npm run desarrollo
@@ -40,4 +42,5 @@ Crear un archivo .env en el directorio raíz con las siguientes variables:
 
 ### Paso 3: Ejecutar Seeders
 - npx sequelize-cli db:seed:all
+
 
