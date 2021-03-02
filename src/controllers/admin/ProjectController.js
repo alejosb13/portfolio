@@ -1,74 +1,83 @@
 'use strict'
 
-/******************** Models ********************/
-const ProjectModel = require('../../models/ProjectModel') 
+/* ******************* Models ******************* */
+const { Section_Project }  = require('../../models')
 
-/******************** Helpers ********************/
+/* ******************* Helpers ******************* */
 const AppHelper   = require('../../helpers/AppHelper') 
 const path        = require('path');
 const mime        = require('mime');
-const fs            = require('fs');
+const fs          = require('fs');
 
 class ProjectController {
     async index(req,res) { 
+        // AppHelper.ValidLogin(req.session,res)
+        
         let data = {}
-        // console.log(req.session);
-        // if(!req.session.loggedin){
-        //     res.redirect('/admin');
-        // }
 
-        data.servicios = await ProjectModel.getprojects();
+        data.projects = await Section_Project.All();
         data.username  = req.session.username;
         data.baseUrl   = AppHelper.getUrl(req,"baseUrl");
         
         // console.log(data.services);
 
-        res.render('admin/landing/servicios_view', data);
+        res.render('admin/landing/project_view', data);
     }
 
-    async setService (req,res) { 
-        let {title,texto,servicio,icono} = req.body
+    async setProject(req,res) { 
+        // AppHelper.ValidLogin(req.session,res)
+
+        let request= {}
+        let { title,texto,project } = req.body
         let cantidad  = 0 
         let filevalue = req.files
         let data = {
             title,
-            texto,
-            servicio,
-            icono,
+            commend:texto,
         };
 
         if(filevalue){
             let file      = filevalue.file
             let extencion = mime.getExtension(file.mimetype);
-            let nameFile  = "services"+servicio
+            let nameFile  = "portfolio"+project
             
             while (true) {
-                if(cantidad !== 0) nameFile = `services${servicio}(${cantidad})`
+                if(cantidad !== 0) nameFile = `portfolio${project}(${cantidad})`
                 
-                let existFile = fs.existsSync(path.join(__dirname,`../../../public/img/uploads/servicios/${nameFile}.${extencion}`))
+                let existFile = fs.existsSync(path.join(__dirname,`../../../public/img/uploads/projects/${nameFile}.${extencion}`))
 
                 if(existFile){
                     cantidad++
                 }else{
-                    file.mv(path.join(__dirname,`../../../public/img/uploads/servicios/${nameFile}.${extencion}`),err => {
+                    file.mv(path.join(__dirname,`../../../public/img/uploads/projects/${nameFile}.${extencion}`),err => {
                         if(err) return res.status(500).send({ message : err })
                         // return res.status(200).send({ message : 'File upload' })
                     })
                     break;
                 }
             }
-            data.img_name= `${nameFile}.${extencion}`
+
+            data.img = `${nameFile}.${extencion}`
         }
 
         try {
-            let result = await ServicesModel.setService(data);
-            console.log(result);
-            return res.json({ status : true })
+
+            let result = await Section_Project.update(data, {
+                where: {
+                  id: project
+                }
+            });
+
+            if(result) request.status = true
+        
         } catch (err) {
+        
             console.log(err);
-            return res.json({ status : false })
+            request.status = false
+
         }
 
+        return res.json(request)
     }
 
   

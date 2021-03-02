@@ -2,11 +2,11 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Projects', [
+    return queryInterface.bulkInsert('Section_Projects', [
       {
         title:    'title' ,
-        comments: 'content',
-        img:      'portfolio.jpg',
+        commend:  'content',
+        img:      'portfolio.jpeg',
         order:    1,
         status:   1 ,
         createdAt: new Date(),
@@ -14,7 +14,7 @@ module.exports = {
       },
       {
         title:    'title2' ,
-        comments: 'content2',
+        commend:  'content2',
         img:      'portfolio.jpg',
         order:    2,
         status:   1 ,
@@ -24,6 +24,6 @@ module.exports = {
     ]);
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Projects', null, {});
+    return queryInterface.bulkDelete('Section_Project', null, {});
   }
 };

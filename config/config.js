@@ -7,18 +7,18 @@ const Appconfig = {
     },
     recommendations: [
         {
-            name:'Ruben Ortega',
-            work: 'Programador en Xyclon',
-            dateWorkIni: '3 de noviembre de 2020, Alejandro trabajó con Ruben en el mismo grupo',
-            comment: 'Muy buen profesional, autodidacta y responsable. curioso en nuevas tecnologías consiguiendo así muy buenos resultados dentro de una empresa',
-            img : './img/user-circle-solid.png'
+            name:           'Ruben Ortega',
+            work:           'Programador en Xyclon',
+            dateWorkIni:    '3 de noviembre de 2020, Alejandro trabajó con Ruben en el mismo grupo',
+            comment:        'Muy buen profesional, autodidacta y responsable. curioso en nuevas tecnologías consiguiendo así muy buenos resultados dentro de una empresa',
+            img :           './img/user-circle-solid.png'
         },
         {
-            name:'Jose Alejandro Prado',
-            work: 'Especialista en Mercadeo Digital y Tradicional',
-            dateWorkIni: '28 de junio de 2018. Jose Alejandro supervisó a Alejandro',
-            comment: 'Excelente Profesional, siempre competitivo y con deseos de aprender... 100% Pro activo y con superación de objetivos en cuanto a los requerimientos que se les asignaba. Amplios conocimientos en Programación demostrando creatividad y disciplina en todo lo que hace. Responsable y con gran sentido de pertenencia en la organización',
-            img : 'https://media-exp1.licdn.com/dms/image/C4D03AQF-JIkgH5UIow/profile-displayphoto-shrink_100_100/0?e=1609977600&v=beta&t=9gJ-zI76QZGRofVaqtNtqJSS-DNmfrl-FiSPHUq27UA'
+            name:           'Jose Alejandro Prado',
+            work:           'Especialista en Mercadeo Digital y Tradicional',
+            dateWorkIni:    '28 de junio de 2018. Jose Alejandro supervisó a Alejandro',
+            comment:        'Excelente Profesional, siempre competitivo y con deseos de aprender... 100% Pro activo y con superación de objetivos en cuanto a los requerimientos que se les asignaba. Amplios conocimientos en Programación demostrando creatividad y disciplina en todo lo que hace. Responsable y con gran sentido de pertenencia en la organización',
+            img :           'https://media-exp1.licdn.com/dms/image/C4D03AQF-JIkgH5UIow/profile-displayphoto-shrink_100_100/0?e=1609977600&v=beta&t=9gJ-zI76QZGRofVaqtNtqJSS-DNmfrl-FiSPHUq27UA'
         },
         {
             name:'Andrés O. Cordero Butrón',

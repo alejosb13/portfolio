@@ -53,24 +53,17 @@
     <div class="conten-gallery container">
         <h2>PROJECTS</h2>
         <div class="row justify-content-center">
+            {% for project in Projects %}
             <div class="col-md-5 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        <img src="https://bootstrapmade.com/demo/themes/MyResume/assets/img/portfolio/portfolio-2.jpg" alt="">
-                        <h5 class="card-title">Title</h5>
-                        <p class="card-text">Content</p>
+                        <img src="../img/uploads/projects/{{ project.img }}" alt="">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.commend }}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="https://bootstrapmade.com/demo/themes/MyResume/assets/img/portfolio/portfolio-2.jpg" alt="">
-                        <h5 class="card-title">Title</h5>
-                        <p class="card-text">Content</p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section> 
@@ -83,7 +76,7 @@
             {% endfor %}
         </ol>
         <div class="carousel-inner">
-            {% for recommendation in recommendations %}
+            {% for recommendation in Recommendations %}
             <div class="carousel-item {% if loop.first %} active {% endif %} ">
                 <div class="recomendacion container">
                     <img src="{{recommendation.img }}" class="d-block w-100" alt="..."> 
