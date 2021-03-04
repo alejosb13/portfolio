@@ -33,20 +33,6 @@ class AppHelper{
 
     }
 
-    /**
-     * Funcuin para direccionar si no esta logueado 
-     * @param {*} session - Variable session del servidor
-     * @param {*} res - Representa la respuesta HTTP que envía una aplicación Express cuando recibe una solicitud HTTP
-     * @param {*} url - URL a donde redireccionar en caso de no estar logueado
-     * 
-     */
-    ValidLogin( session, res, url = '/admin' ) {
-        console.log(session);
-        if(!session.loggedin){
-            res.redirect(url);
-        }
-
-    }
 
 }
  

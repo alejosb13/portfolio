@@ -9,6 +9,9 @@ const BannerController      = require('../src/controllers/admin/LandingControlle
 const ServiciosController   = require('../src/controllers/admin/ServiciosController')
 const ProjectController     = require('../src/controllers/admin/ProjectController')
 
+/******************** middleware ********************/
+const Middleware     = require('../src/middleware')
+
 
 /******************** Routes ********************/
 
@@ -18,7 +21,7 @@ router.post('/admin/auth', LoginController.auth);
 router.get('/admin/log-out', LoginController.logOut);
 
 // Admin
-router.get('/admin/home', AdminController.index);
+router.get('/admin/home',Middleware.AuthValidation, AdminController.index);
 
 //  Banner 
 router.get('/admin/landing/inicio', BannerController.inicio);
