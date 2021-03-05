@@ -10,7 +10,7 @@ const path        = require('path');
 const mime        = require('mime');
 const fs          = require('fs');
 
-class ServiciosController {
+class ServiceController {
     async index(req,res) { 
         
         // AppHelper.ValidLogin(req.session,res)
@@ -22,14 +22,13 @@ class ServiciosController {
         data.username  = req.session.username;
         data.servicios = await Section_Service.All();
 
-        res.render('admin/landing/servicios_view', data);
+        res.render('admin/landing/service_view', data);
     }
 
     async setService (req,res) { 
-        // AppHelper.ValidLogin(req.session,res)
-
+        let { idService }   = req.params
         let request= {}
-        let { title,texto,servicio,icono } = req.body
+        let { title,texto,icono } = req.body
         let cantidad  = 0 
         let filevalue = req.files
         let data = {
@@ -41,10 +40,10 @@ class ServiciosController {
         if(filevalue){
             let file      = filevalue.file
             let extencion = mime.getExtension(file.mimetype);
-            let nameFile  = "services"+servicio
+            let nameFile  = "services"+idService
             
             while (true) {
-                if(cantidad !== 0) nameFile = `services${servicio}(${cantidad})`
+                if(cantidad !== 0) nameFile = `services${idService}(${cantidad})`
                 
                 let existFile = fs.existsSync(path.join(__dirname,`../../../public/img/uploads/servicios/${nameFile}.${extencion}`))
 
@@ -65,7 +64,7 @@ class ServiciosController {
 
             let result = await Section_Service.update(data, {
                 where: {
-                  id: servicio
+                  id: idService
                 }
             });
 
@@ -84,4 +83,4 @@ class ServiciosController {
   
 }
  
-module.exports = new ServiciosController();
+module.exports = new ServiceController();

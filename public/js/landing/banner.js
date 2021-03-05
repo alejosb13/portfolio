@@ -21,16 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
 async function setKeyword(event) {
     event.preventDefault();
     let keyword = document.querySelector("#formKeyword input[name='keyword']").value
-    let url = BASEURL + 'admin/landing/inicio/setkeywords';
+    let url = BASEURL + 'admin/landing/banner/keywords';
     var data = {
         keytext: keyword,
         section: 1,
     };
 
     let response = await fetch(url, {
-        method: 'POST', // or 'PUT'
+        method: 'POST',
         body: JSON.stringify(data), 
-    // data can be `string` or {object}!
         headers:{
             'Content-Type': 'application/json'
         }
@@ -52,18 +51,13 @@ async function setKeyword(event) {
 }
 
 function deleteKeyword(event) {
-    // event.preventDefault();
-    value = event.target.dataset.itemKeyword
-    keyword = event.target.parentElement.innerText
-    // console.log(event);
+    let idkeyword   = event.target.dataset.itemKeyword
+    let keyword     = event.target.parentElement.innerText
+    let url         = BASEURL + `admin/landing/banner/keywords/${ idkeyword }`;
 
-    let url = BASEURL + 'admin/landing/inicio/deletekeywords';
-    var data = {
-        id: value,
-    };
     swal({
         title: "¿Desea eliminar la Keyword?",
-        text: `Una vez eliminada no podra recuperar la Keyword "${keyword}".`,
+        text: `Una vez eliminada no podra recuperar la Keyword "${ keyword }".`,
         icon: "warning",
         buttons: ["Cancelar", "Eliminar"],
         dangerMode: true,
@@ -71,8 +65,7 @@ function deleteKeyword(event) {
     .then(async(willDelete) => {
         if (willDelete) {
             let response = await fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(data), 
+                method: 'DELETE',
                 headers:{
                     'Content-Type': 'application/json'
                 }
@@ -96,7 +89,7 @@ async function updatedata(event) {
     let title       = document.getElementById("title").value ||""
     let subtitle    = document.getElementById("subtitle").value ||""
     let img         = document.getElementById("image").files[0] || ""        
-    let url         = BASEURL + 'admin/landing/inicio/updatedata';
+    let url         = BASEURL + `admin/landing/banner/1`;
     const formData  = new FormData()
 
     formData.append('file',img) 
@@ -104,10 +97,12 @@ async function updatedata(event) {
     formData.append('subtitle',subtitle) 
     
     let response = await fetch(url, {
-        method: 'POST',
+        method: 'PUT',
         body: formData, 
     });
+
     let respuesta = await response.json();
+    
     if (respuesta.status) {
         swal("Modificación éxitosa!", "Tus datos se modificaron correctamente.", "success")
         .then(() => {
@@ -115,5 +110,4 @@ async function updatedata(event) {
         });
     }
 
-    // console.log(respuesta);
 }

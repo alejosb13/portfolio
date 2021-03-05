@@ -26,11 +26,11 @@ class ProjectController {
 
     async setProject(req,res) { 
         // AppHelper.ValidLogin(req.session,res)
-
-        let request= {}
-        let { title,texto,project } = req.body
-        let cantidad  = 0 
-        let filevalue = req.files
+        let { idProject} = req.params
+        let request      = {}
+        let cantidad     = 0 
+        let filevalue    = req.files
+        let { title,texto } = req.body
         let data = {
             title,
             commend:texto,
@@ -39,10 +39,10 @@ class ProjectController {
         if(filevalue){
             let file      = filevalue.file
             let extencion = mime.getExtension(file.mimetype);
-            let nameFile  = "portfolio"+project
+            let nameFile  = "portfolio"+idProject
             
             while (true) {
-                if(cantidad !== 0) nameFile = `portfolio${project}(${cantidad})`
+                if(cantidad !== 0) nameFile = `portfolio${idProject}(${cantidad})`
                 
                 let existFile = fs.existsSync(path.join(__dirname,`../../../public/img/uploads/projects/${nameFile}.${extencion}`))
 
@@ -64,7 +64,7 @@ class ProjectController {
 
             let result = await Section_Project.update(data, {
                 where: {
-                  id: project
+                  id: idProject
                 }
             });
 

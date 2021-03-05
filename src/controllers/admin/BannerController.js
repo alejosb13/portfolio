@@ -12,25 +12,20 @@ const fs          = require('fs');
 class BannerController {
     async inicio(req,res) { 
         let data = {}
-
-        // AppHelper.ValidLogin(req.session,res)
-
+        let KeywordBannerSeccion = 1
 
         data.baseUrl     = AppHelper.getUrl(req,"baseUrl")
         data.dataInicio  = await Section_Inicio.All();
-        data.keywords    = await Section_Inicio.BannerKeywordsArray();
+        data.keywords    = await Keyword.getSection(KeywordBannerSeccion)
         data.username    = req.session.username;
 
-        res.render('admin/landing/inicio_view', data );
+        res.render('admin/landing/banner_view', data );
     }
 
     async setKeyword (req,res) { 
-    
-        // AppHelper.ValidLogin(req.session,res)
-
-
         let request = {}
         let { keytext,section } = req.body
+        
 
         if(keytext && section){
             try{
@@ -57,16 +52,15 @@ class BannerController {
         
         // AppHelper.ValidLogin(req.session,res)
 
+        let { idKeyword }   = req.params
+        let request         = { status : false }
         
-        let request = { status : false }
-        let { id } = req.body
-        
-        if(iid){
+        if(idKeyword){
             
             try {
                 await Keyword.destroy({
                     where: {
-                        id
+                        id: idKeyword
                     }
                 });
                 
@@ -83,12 +77,11 @@ class BannerController {
 
     async updateData (req,res) { 
 
-        // AppHelper.ValidLogin(req.session,res)
-
+        let { idBanner }       = req.params
         let { title,subtitle } = req.body
-        let request   = {} 
-        let cantidad  = 0 
-        let filevalue = req.files || false
+        let request            = {} 
+        let cantidad           = 0 
+        let filevalue          = req.files || false
         let data = {
             title,
             subtitle
@@ -123,7 +116,7 @@ class BannerController {
 
             let result = await Section_Inicio.update(data, {
                 where: {
-                  id: 1
+                  id: idBanner
                 }
             });
 

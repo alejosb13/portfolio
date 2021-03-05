@@ -32,8 +32,18 @@ module.exports = (sequelize, DataTypes) => {
         });
         
         return (data.length > 0)? data.map( (val)=> val.keyword ) : [];
-
     }
   
+    Keyword.getSection = async (section) =>{
+        const data = await Keyword.findAll({
+            where: {
+                keyword_section: section,  // 1 = banner, 2 = meta 
+                status: 1  // activo
+            },
+            raw : true 
+        });
+        
+        return data;
+    }
     return Keyword;
 };

@@ -15,24 +15,21 @@ async function setServices(event) {
     event.preventDefault();
     let submit = event.currentTarget;
 
-    // console.log(submit);
     let title       = submit.querySelector("#title").value
-    let text        = submit.querySelector("#text").value
-    // let icono       = submit.querySelector("#icono").value        
-    let servicio    = submit.querySelector("#nproject").value        
+    let text        = submit.querySelector("#text").value     
+    let idProject   = submit.querySelector("#nproject").value        
     let img         = submit.querySelector("#image").files[0] || ""        
-    let url         = BASEURL + 'admin/landing/project/update';
+    let url         = BASEURL + `admin/landing/project/${ idProject }`;
     
     let  formData  = new FormData()
     formData.append('file',img) 
     formData.append('title',title) 
     formData.append('texto',text) 
-    formData.append('project',servicio) 
-    // formData.append('icono',icono) 
+ 
     
 // console.log(text);
     let response = await fetch(url, {
-        method: 'POST',
+        method: 'PUT',
         body: formData, 
     });
 

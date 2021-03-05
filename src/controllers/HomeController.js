@@ -10,11 +10,11 @@ class HomeController {
 
     async index(req, res) {
         let data = {};
-        
+        let KeywordBanner = 1
         // data.recommendations = recommendations
         data.BannerInicio           = await Section_Inicio.All()
         // data.keywords        = await Section_Inicio.BannerKeywords()
-        data.keywords               = await Keyword.findSection(1)
+        data.keywords               = await Keyword.findSection(KeywordBanner)
         data.Servicios              = await Section_Service.All();
         data.Recommendations        = await Section_Recomendation.All();
         data.Projects               = await Section_Project.All();

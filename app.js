@@ -7,7 +7,6 @@ let app 		= express();
 
 
 require('dotenv').config() // leer datos de archivo .env
-// require('./config/database') // Conexion con base de datos 
 const { connection } = require('./database/db') // Conexion con base de datos 
 
 
@@ -45,7 +44,6 @@ app.use(fileUpload());
 
 /********** Routes **********/
 let router = require('./config/routes');  // llamo el archivo de rutas
-// const { domainToUnicode } = require('url');
 app.use('/', router); 	// declaro el uso de mis rutas
 
 const PORT = process.env.APP_PORT || 3000; // puerto declarado en archivo .env

@@ -5,8 +5,8 @@ let router  = express.Router();
 const HomeController        = require('../src/controllers/HomeController')
 const LoginController       = require('../src/controllers/LoginController')
 const AdminController       = require('../src/controllers/admin/AdminController')
-const BannerController      = require('../src/controllers/admin/LandingController')
-const ServiciosController   = require('../src/controllers/admin/ServiciosController')
+const BannerController      = require('../src/controllers/admin/BannerController')
+const ServiceController     = require('../src/controllers/admin/ServiceController')
 const ProjectController     = require('../src/controllers/admin/ProjectController')
 
 /******************** middleware ********************/
@@ -24,26 +24,34 @@ router.get('/admin/log-out', LoginController.logOut);
 router.get('/admin/home',Middleware.AuthValidation, AdminController.index);
 
 //  Banner 
-router.get('/admin/landing/inicio', BannerController.inicio);
-router.post('/admin/landing/inicio/setkeywords', BannerController.setKeyword);
-router.post('/admin/landing/inicio/deletekeywords', BannerController.deleteKeyword);
-router.post('/admin/landing/inicio/updatedata', BannerController.updateData);
+router.get('/admin/landing/banner', BannerController.inicio);
+router.put('/admin/landing/banner/:idBanner', BannerController.updateData);
+
+router.delete('/admin/landing/banner/keywords/:idKeyword', BannerController.deleteKeyword);
+router.post('/admin/landing/banner/keywords', BannerController.setKeyword);
 
 // Servicios
-router.get('/admin/landing/servicios', ServiciosController.index);
-router.post('/admin/landing/servicios/update', ServiciosController.setService);
+router.get('/admin/landing/services', ServiceController.index);
+router.put('/admin/landing/services/:idService', ServiceController.setService);
 
 // Projects
 router.get('/admin/landing/project', ProjectController.index);
-router.post('/admin/landing/project/update', ProjectController.setProject);
+router.put('/admin/landing/project/:idProject', ProjectController.setProject);
 
 // Landing
 router.get('/',HomeController.index);
 
 
 // falta midelware oauth
-// falta crsf token
 // falta corregir url
+/* GET    /api/book/1/authors     -- returns list of all authors for /book/1
+    POST   /api/book/1/authors     -- create a new author, returns the new author uri, e.g. /api/author/1
+    GET    /api/author/1           -- get /author/1 info according to MIME type etc.
+    PUT    /api/author/1           -- update /author/1
+    DELETE /api/author/1           -- delete the /author/1 resource
+    DELETE /api/book/1/author/1    -- delete author/1 from /book/ */
+    /* /events:id' */
+// falta crsf token
 // falta corregir idioma de proyecto
 // falta corregir pagina de Errores
 
