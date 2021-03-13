@@ -79,7 +79,7 @@
             {% for recommendation in Recommendations %}
             <div class="carousel-item {% if loop.first %} active {% endif %} ">
                 <div class="recomendacion container">
-                    <img src="{{recommendation.img }}" class="d-block w-100" alt="..."> 
+                    <img src="../img/uploads/recomendations/{{recommendation.img }}" class="d-block w-100" alt="..."> 
                     <span class="name">{{ recommendation.name }}</span>
                     <span class="work">{{ recommendation.work }}</span>
                     <span class="dateWorkIni">{{ recommendation.dateWorkIni }}</span>

@@ -2,12 +2,13 @@ let express = require('express');
 let router  = express.Router();
 
 /******************** Controllers ********************/
-const HomeController        = require('../src/controllers/HomeController')
-const LoginController       = require('../src/controllers/LoginController')
-const AdminController       = require('../src/controllers/admin/AdminController')
-const BannerController      = require('../src/controllers/admin/BannerController')
-const ServiceController     = require('../src/controllers/admin/ServiceController')
-const ProjectController     = require('../src/controllers/admin/ProjectController')
+const HomeController            = require('../src/controllers/HomeController')
+const LoginController           = require('../src/controllers/LoginController')
+const AdminController           = require('../src/controllers/admin/AdminController')
+const BannerController          = require('../src/controllers/admin/BannerController')
+const ServiceController         = require('../src/controllers/admin/ServiceController')
+const ProjectController         = require('../src/controllers/admin/ProjectController')
+const RecomendationController   = require('../src/controllers/admin/RecomendationController')
 
 /******************** middleware ********************/
 const Middleware     = require('../src/middleware')
@@ -37,6 +38,11 @@ router.put('/admin/landing/services/:idService', ServiceController.setService);
 // Projects
 router.get('/admin/landing/project', ProjectController.index);
 router.put('/admin/landing/project/:idProject', ProjectController.setProject);
+
+// Recomendation
+router.get('/admin/landing/recomendations', RecomendationController.index);
+router.put('/admin/landing/recomendations/:idRecomendation', RecomendationController.setProject);
+
 
 // Landing
 router.get('/',HomeController.index);
