@@ -9,6 +9,7 @@ const BannerController          = require('../src/controllers/admin/BannerContro
 const ServiceController         = require('../src/controllers/admin/ServiceController')
 const ProjectController         = require('../src/controllers/admin/ProjectController')
 const RecomendationController   = require('../src/controllers/admin/RecomendationController')
+const SocialMediaController     = require('../src/controllers/admin/SocialMediaController')
 
 /******************** middleware ********************/
 const Middleware     = require('../src/middleware')
@@ -24,6 +25,7 @@ router.get('/admin/log-out', LoginController.logOut);
 // Admin
 router.get('/admin/home',Middleware.AuthValidation, AdminController.index);
 
+// *** Landig Section ***
 //  Banner 
 router.get('/admin/landing/banner', BannerController.inicio);
 router.put('/admin/landing/banner/:idBanner', BannerController.updateData);
@@ -42,7 +44,20 @@ router.put('/admin/landing/project/:idProject', ProjectController.setProject);
 // Recomendation
 router.get('/admin/landing/recomendations', RecomendationController.index);
 router.put('/admin/landing/recomendations/:idRecomendation', RecomendationController.setProject);
+// *** End Landig Section ***
 
+// *** Config *** 
+
+// Social Media
+router.get('/admin/config/socialmedia', SocialMediaController.index);
+router.put('/admin/config/socialmedia/:idSocialMedia', SocialMediaController.setSocialMedia);
+
+// admin/config/socialmedia/4
+// admin/config/socialmedia
+// admin/config/keywords
+// admin/config/head
+// admin/config/footer
+// *** End Config *** 
 
 // Landing
 router.get('/',HomeController.index);

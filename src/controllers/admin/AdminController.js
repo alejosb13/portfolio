@@ -7,8 +7,7 @@ class AdminController {
     async index(req,res) { 
         let data = {}
 
-        // AppHelper.ValidLogin(req.session,res)
-
+        data.section     = "D-HOME"
         data.username = req.session.username,
         data.baseUrl  = AppHelper.getUrl(req,"baseUrl")
 

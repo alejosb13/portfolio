@@ -90,7 +90,8 @@ a:focus {
     display: block;
 }
 
-#sidebar ul li a:hover {
+#sidebar ul li a:hover, 
+#sidebar ul li a.active{
     color: #17a2b8;
     background: #fff;
 }
@@ -379,6 +380,10 @@ fieldset{margin:0 0 3rem;padding:0;border:none}
 .strFullDate {
     color: #a5a5a5;
     font-size: 1.04rem;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #46a3b9;
 }
 
 /* ---------------------------------------------------

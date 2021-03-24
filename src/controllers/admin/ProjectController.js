@@ -11,15 +11,12 @@ const fs          = require('fs');
 
 class ProjectController {
     async index(req,res) { 
-        // AppHelper.ValidLogin(req.session,res)
-        
         let data = {}
 
-        data.projects = await Section_Project.All();
+        data.section   = "L-PROJECT"
+        data.projects  = await Section_Project.All();
         data.username  = req.session.username;
         data.baseUrl   = AppHelper.getUrl(req,"baseUrl");
-        
-        // console.log(data.services);
 
         res.render('admin/landing/project_view', data);
     }

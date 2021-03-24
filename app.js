@@ -28,7 +28,7 @@ app.use('/sweetalert', express.static(__dirname + '/node_modules/sweetalert/dist
 
 /********** Session **********/
 app.use(session({
-    secret: 'secret',
+    secret: process.env.APP_KEY || 'secret',
 	resave: true,
 	saveUninitialized: true,
 })); // configuracion para el uso de sessiones

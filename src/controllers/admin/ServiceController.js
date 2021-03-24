@@ -12,12 +12,10 @@ const fs          = require('fs');
 
 class ServiceController {
     async index(req,res) { 
-        
-        // AppHelper.ValidLogin(req.session,res)
-
 
         let data = {}
-            
+        
+        data.section   = "L-SERVICE"
         data.baseUrl   = AppHelper.getUrl(req,"baseUrl");
         data.username  = req.session.username;
         data.servicios = await Section_Service.All();

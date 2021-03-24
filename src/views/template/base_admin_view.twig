@@ -20,6 +20,7 @@
 
 <body>
 
+
     <div class="wrapper">
         <!-- Sidebar  -->
         {% block menu %}
@@ -29,41 +30,44 @@
             </div>
 
             <ul class="list-unstyled components">
-                {# <p>Panel de control</p> #}
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Landing</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a class="{% if section == "D-HOME" %}active{% endif %}" href="{{ baseUrl }}admin/home">Inicio</a>
+                </li>
+                <li class="{% if section|first == "L" %}active{% endif %}"> {# si la primera letra de la seccion es landing agrega la clase  active #}
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="{% if section|first == "L" %}true{% else %}false{% endif %}" class="dropdown-toggle">Landing</a>
+                    <ul class="collapse list-unstyled {% if section|first == "L" %}show{% endif %}" id="homeSubmenu">
                         <li>
-                            <a href="#">Inicio</a>
+                            <a class="{% if section == "L-BANNER" %}active{% endif %}" href="{{ baseUrl }}admin/landing/banner">Banner</a>
                         </li>
                         <li>
-                            <a href="#">Servicios</a>
+                            <a class="{% if section == "L-SERVICE" %}active{% endif %}" href="{{ baseUrl }}admin/landing/services" >Servicios</a>
                         </li>
                         <li>
-                            <a href="#">Portfolio</a>
+                            <a class="{% if section == "L-PROJECT" %}active{% endif %}" href="{{ baseUrl }}admin/landing/project">Proyectos</a>
                         </li>
                         <li>
-                            <a href="#">Recomendaciones</a>
+                            <a class="{% if section == "L-RECOMENDATION" %}active{% endif %}" href="{{ baseUrl }}admin/landing/recomendations">Recomendaciones</a>
                         </li>
                         <li>
-                            <a href="#">Pie de pagina</a>
+                            <a class="{% if section == "L-FOOTER" %}active{% endif %}" href="{{ baseUrl }}admin/landing/footer">Pie de pagina</a>
                         </li>
                     </ul>
                 </li>
+
                 <li>
-                    <a href="#">Redes Sociales</a>
-                </li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Configuración</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a href="#">Page 1</a>
+                            <a class="{% if section == "C-SOCIALMEDIA" %}active{% endif %}" href="{{ baseUrl }}admin/config/socialmedia">Redes Sociales</a>
                         </li>
                         <li>
-                            <a href="#">Page 2</a>
+                            <a class="{% if section == "C-KEYWORDS" %}active{% endif %}" href="{{ baseUrl }}admin/config/keywords">Palabras Claves</a>
                         </li>
                         <li>
-                            <a href="#">Page 3</a>
+                            <a class="{% if section == "C-HEADER" %}active{% endif %}" href="{{ baseUrl }}admin/config/head">Etiquetas en Cabecera</a>
+                        </li>
+                        <li>
+                            <a class="{% if section == "C-FOOTER" %}active{% endif %}" href="{{ baseUrl }}admin/config/footer">Etiqueta en Pie de Página</a>
                         </li>
                     </ul>
                 </li>

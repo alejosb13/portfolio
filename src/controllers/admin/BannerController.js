@@ -14,6 +14,7 @@ class BannerController {
         let data = {}
         let KeywordBannerSeccion = 1
 
+        data.section     = "L-BANNER"
         data.baseUrl     = AppHelper.getUrl(req,"baseUrl")
         data.dataInicio  = await Section_Inicio.All();
         data.keywords    = await Keyword.getSection(KeywordBannerSeccion)

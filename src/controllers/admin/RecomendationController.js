@@ -11,15 +11,12 @@ const fs          = require('fs');
 
 class RecomendationController {
     async index(req,res) { 
-        // AppHelper.ValidLogin(req.session,res)
-        
         let data = {}
 
+        data.section        = "L-RECOMENDATION"
         data.recomendations = await Section_Recomendation.All();
         data.username       = req.session.username;
         data.baseUrl        = AppHelper.getUrl(req,"baseUrl");
-        
-        // console.log(data.services);
 
         res.render('admin/landing/recomendation_view', data);
     }

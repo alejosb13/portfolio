@@ -38,7 +38,7 @@ class LoginController {
                 });
 
                 if(user.length > 0){
-                    req.session.loggedin = true;
+                    req.session.loggedIn = true;
                     req.session.username = username;
 
                     request.valid   = true;

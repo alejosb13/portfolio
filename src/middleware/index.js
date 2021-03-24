@@ -13,15 +13,13 @@ class Middleware{
      */
 //    AppHelper.ValidLogin(req.session,res)
     AuthValidation( req, res, next) {
-        let session = req.session || false
+        let loggedIn = req.session.loggedIn|| false
         let URLAuth = '/admin'
 
-        // console.log(session);
-        if(!session.loggedin){
-            res.redirect(URLAuth);
-        }
-
-        next();
+        if(loggedIn) return next();
+        
+        res.redirect(URLAuth);
+        
     }
 
 }
