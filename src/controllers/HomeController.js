@@ -25,7 +25,7 @@ class HomeController {
         data.Servicios              = await Section_Service.All();
         data.Recommendations        = await Section_Recomendation.All();
         data.Projects               = await Section_Project.All();
-        data.SocialMedia               = await SocialMedia.All();
+        data.SocialMedia            = await SocialMedia.All();
         
         res.render('home_view.twig', data );
     }

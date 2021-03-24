@@ -21,7 +21,7 @@ class RecomendationController {
         res.render('admin/landing/recomendation_view', data);
     }
 
-    async setProject(req,res) { 
+    async setRecomendation(req,res) { 
         // AppHelper.ValidLogin(req.session,res)
         let { idRecomendation} = req.params
         let request      = {}

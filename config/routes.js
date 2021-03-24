@@ -43,14 +43,15 @@ router.put('/admin/landing/project/:idProject', ProjectController.setProject);
 
 // Recomendation
 router.get('/admin/landing/recomendations', RecomendationController.index);
-router.put('/admin/landing/recomendations/:idRecomendation', RecomendationController.setProject);
+router.put('/admin/landing/recomendations/:idRecomendation', RecomendationController.setRecomendation);
+
 // *** End Landig Section ***
 
 // *** Config *** 
-
 // Social Media
 router.get('/admin/config/socialmedia', SocialMediaController.index);
 router.put('/admin/config/socialmedia/:idSocialMedia', SocialMediaController.setSocialMedia);
+router.post('/admin/config/socialmedia', SocialMediaController.insertSocialMedia);
 
 // admin/config/socialmedia/4
 // admin/config/socialmedia
