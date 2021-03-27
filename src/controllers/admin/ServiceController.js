@@ -19,6 +19,8 @@ class ServiceController {
         data.baseUrl   = AppHelper.getUrl(req,"baseUrl");
         data.username  = req.session.username;
         data.servicios = await Section_Service.All();
+        data.csrfToken = req.csrfToken()
+
 
         res.render('admin/landing/service_view', data);
     }

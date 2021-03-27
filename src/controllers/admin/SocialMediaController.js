@@ -13,6 +13,8 @@ class SocialMediaController {
         data.section     = "C-SOCIALMEDIA"
         data.baseUrl     = AppHelper.getUrl(req,"baseUrl")
         data.SocialMedia = await SocialMedia.All();
+        data.csrfToken   = req.csrfToken()
+
 
         res.render('admin/config/socialmedia_view', data);
     }

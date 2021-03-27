@@ -20,11 +20,13 @@ async function setServices(event) {
     let idProject   = submit.querySelector("#nproject").value        
     let img         = submit.querySelector("#image").files[0] || ""        
     let url         = BASEURL + `admin/landing/project/${ idProject }`;
+    let csrf        = document.querySelector('meta[name="csrf-token"]').getAttribute('content')  
     
     let  formData  = new FormData()
     formData.append('file',img) 
     formData.append('title',title) 
     formData.append('texto',text) 
+    formData.append('_csrf',csrf) 
  
     
 // console.log(text);

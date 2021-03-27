@@ -34,6 +34,12 @@ module.exports = (sequelize, DataTypes) => {
         return (data.length > 0)? data.map( (val)=> val.keyword ) : [];
     }
   
+    /**
+     *  returns a array of objects with all keyword 
+     * @param {number} section - Section the keyword
+     * @returns {Array} data - all keywords
+     * 
+     */
     Keyword.getSection = async (section) =>{
         const data = await Keyword.findAll({
             where: {
@@ -45,5 +51,7 @@ module.exports = (sequelize, DataTypes) => {
         
         return data;
     }
+
+
     return Keyword;
 };

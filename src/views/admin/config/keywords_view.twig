@@ -1,0 +1,103 @@
+{% extends '../../template/base_admin_view.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ baseUrl }}css/admin/landing.css">
+{% endblock %}
+
+{% block body %}
+<div class="col-md-8 mb-3 ">
+    <div class="card h-md-100">
+        <div class="card-header d-flex flex-between-center pb-0">
+            <h4 class="mb-0">Sección de Keywords</h4>
+        </div>
+        <div class="card-body pt-2">
+            <div class="row no-gutters h-100 align-items-center">
+                <div class="col">
+                    <div class="media align-items-center">
+                        <div class="media-body">
+
+                            <div class="fs--2 font-weight-semi-bold">
+                                <a href="{{ baseUrl }}" target="_blank" class="btn btn-outline-info">
+                                    <i class='bx bx-window-alt'></i> Vista Previa
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-4  mb-3 ">
+    <div class="card h-md-100">
+        <div class="card-header d-flex flex-between-center pb-0">
+            <h6 class="mb-0">Horario</h6>
+        </div>
+        <div class="card-body pt-2">
+            <div class="row no-gutters h-100 align-items-center">
+                <div class="col">
+                    <div class="media align-items-center">
+                        <i class='bx bx-time pr-3' style="color: #17a2b8;font-size: 54px;"></i>
+                        <div class="media-body">
+                            <h6 class="mb-2 horafull"></h6>
+                            <div class="fs--2 font-weight-semi-bold">
+                                <span class="strFullDate"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 mb-3 ">
+    <div class="card h-md-100">
+        <div class="card-header d-flex flex-between-center pb-0">
+        
+            <h5 class="mb-0"><i class='bx bx-purchase-tag-alt'></i> Keywords</h5>
+        </div>
+        <div class="card-body pt-2">
+            <div class="row no-gutters h-100 align-items-center">
+                <div class="col">
+                    <div class="media align-items-center">
+                        <div class="media-body">
+                            <form id="formKeyword" action="#">
+                                <div class="row justify-content-center align-items-center">
+                                    <div class="col-md-7 ">
+                                        <div class="form-group">
+                                            <input type="text" required="required" name="keyword">
+                                            <label for="input" class="control-label">Keyword</label><i class="bar"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input name="anadir" class="btn btn-primary btn-block" type="submit" value="Añadir">
+                                        {# <button type="button" name="" class="btn btn-primary btn-block">Añadir</button>     #}
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="row pt-5">
+                                {% for keyword in keywords %}
+                                <div class="col-md-6 pb-3">
+                                    <div class="item-keyword"  >
+                                        <i class='bx bx-purchase-tag-alt'></i>
+                                        <span>{{ keyword.keyword|e }}</span>
+                                        <i class='bx bx-trash' data-item-keyword="{{ keyword.id }}"></i>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+    {% block javascripts %}
+        <script  type="text/javascript" src="{{ baseUrl }}js/config/keyword.js" charset="UTF-8" ></script>
+    {% endblock %}

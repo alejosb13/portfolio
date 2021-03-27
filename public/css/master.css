@@ -334,7 +334,6 @@ footer .social-links {
 }
 
 footer .social-links a {
-  font-size: 18px;
   display: inline-block;
   background: #0563bb;
   color: #fff;
@@ -343,9 +342,10 @@ footer .social-links a {
   margin-right: 4px;
   border-radius: 50%;
   text-align: center;
-  width: 36px;
-  height: 36px;
   transition: 0.3s;
+  font-size: 27px;
+  width: 40px;
+  height: 42px;
 }
 
 footer .social-links a:hover {

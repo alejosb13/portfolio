@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('formdatainicio').addEventListener('submit', updatedata);
-
     document.getElementById('formKeyword').addEventListener('submit', setKeyword);
     
     let elementDeleteNodeList = document.querySelectorAll("[data-item-keyword]")
@@ -11,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
-    fileUpload()
 
 });
 
@@ -20,13 +17,14 @@ async function setKeyword(event) {
     event.preventDefault();
     let keyword = document.querySelector("#formKeyword input[name='keyword']").value
     let url = BASEURL + 'admin/config/keywords';
-    let csrf        = document.querySelector('meta[name="csrf-token"]').getAttribute('content')  
-
+    let csrf  = document.querySelector('meta[name="csrf-token"]').getAttribute('content')  
     var data = {
         keytext: keyword,
-        section: 1,
+        section: 2,
         _csrf:csrf
     };
+
+
 
     let response = await fetch(url, {
         method: 'POST',
@@ -36,7 +34,7 @@ async function setKeyword(event) {
         }
     });
     let respuesta = await response.json();
-    console.log(respuesta);
+
     if(respuesta.status){
         swal("Guardado con Éxito!", "Tu Keyword se cargo correctamente.", "success")
         .then(() => {
@@ -57,6 +55,7 @@ function deleteKeyword(event) {
     let url         = BASEURL + `admin/config/keywords/${ idkeyword }`;
     let csrf        = document.querySelector('meta[name="csrf-token"]').getAttribute('content')  
 
+
     swal({
         title: "¿Desea eliminar la Keyword?",
         text: `Una vez eliminada no podra recuperar la Keyword "${ keyword }".`,
@@ -66,10 +65,9 @@ function deleteKeyword(event) {
     })
     .then(async(willDelete) => {
         if (willDelete) {
-
             const formData  = new FormData()
             formData.append('_csrf',csrf) 
-        
+
             let response = await fetch(url, {
                 method: 'DELETE',
                 headers:{
@@ -88,35 +86,5 @@ function deleteKeyword(event) {
 
         } 
     });
-
-}
-
-async function updatedata(event) {
-    event.preventDefault();
-    let title       = document.getElementById("title").value ||""
-    let subtitle    = document.getElementById("subtitle").value ||""
-    let img         = document.getElementById("image").files[0] || ""        
-    let csrf        = document.querySelector('meta[name="csrf-token"]').getAttribute('content')  
-    let url         = BASEURL + `admin/landing/banner/1`;
-    
-    const formData  = new FormData()
-    formData.append('file',img) 
-    formData.append('title',title) 
-    formData.append('subtitle',subtitle) 
-    formData.append('_csrf',csrf) 
-    
-    let response = await fetch(url, {
-        method: 'PUT',
-        body: formData, 
-    });
-
-    let respuesta = await response.json();
-    
-    if (respuesta.status) {
-        swal("Modificación éxitosa!", "Tus datos se modificaron correctamente.", "success")
-        .then(() => {
-            location.reload();
-        });
-    }
 
 }

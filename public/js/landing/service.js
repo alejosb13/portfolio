@@ -21,13 +21,15 @@ async function setServices(event) {
     let idservice   = submit.querySelector("#nservicio").value        
     let img         = submit.querySelector("#image").files[0] || ""        
     let url         = BASEURL + `admin/landing/services/${ idservice }`;
+    let csrf        = document.querySelector('meta[name="csrf-token"]').getAttribute('content')  
     
     let  formData  = new FormData()
     formData.append('file',img) 
     formData.append('title',title) 
     formData.append('texto',text) 
     formData.append('icono',icono) 
-    
+    formData.append('_csrf',csrf) 
+
     let response = await fetch(url, {
         method: 'PUT',
         body: formData, 

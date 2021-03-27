@@ -14,17 +14,16 @@ class LoginController {
     index(req, res){
 
         res.render('admin/login_view',{
-            baseUrl: AppHelper.getUrl(req,"baseUrlPath"),
+            csrfToken: req.csrfToken(),
+            baseUrl: AppHelper.getUrl(req,"baseUrl"),
         });
     }
 
     async auth(req, res){
         let { username,password } = req.body
         let request = {
-            valid:false,
-            error:false
+            status:false,
         };
-
         if(username && password){
 
             try {
@@ -41,7 +40,7 @@ class LoginController {
                     req.session.loggedIn = true;
                     req.session.username = username;
 
-                    request.valid   = true;
+                    request.status   = true;
                 }else{
                     request.message  = "Usuario o Contraseña son incorrectos.";
                 }

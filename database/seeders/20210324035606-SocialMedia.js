@@ -8,7 +8,7 @@ module.exports = {
                 "name": "Facebook",
                 "url":  "https://www.facebook.com/alej.sanchez.3/",
                 "tags": "alej.sanchez.3",
-                "html": "",
+                "html": "bx bxl-facebook",
                 status: 1,
                 createdAt: new Date(),
                 updatedAt: new Date()
@@ -17,7 +17,7 @@ module.exports = {
                 "name": "LinkedIn",
                 "url":  "https://www.linkedin.com/in/alejo-sanchez/",
                 "tags": "alejo-sanchez",
-                "html": "",
+                "html": "bx bxl-linkedin",
                 status: 1,
                 createdAt: new Date(),
                 updatedAt: new Date()
@@ -26,7 +26,7 @@ module.exports = {
                 "name": "Instagram",
                 "url":  "https://www.instagram.com/alejosb13/",
                 "tags": "alejosb13",
-                "html": "",
+                "html": "bx bxl-instagram",
                 "status": 1,
                 createdAt: new Date(),
                 updatedAt: new Date()

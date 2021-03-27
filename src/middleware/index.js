@@ -1,5 +1,4 @@
 'use strict'
-// const path = require('path') 
 
 
 class Middleware{
@@ -11,7 +10,6 @@ class Middleware{
      * @param {*} next - permite continuar la aplicacion, de lo contrario quedara colgada
      * 
      */
-//    AppHelper.ValidLogin(req.session,res)
     AuthValidation( req, res, next) {
         let loggedIn = req.session.loggedIn|| false
         let URLAuth = '/admin'

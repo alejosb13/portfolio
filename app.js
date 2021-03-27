@@ -1,10 +1,10 @@
 let express     = require('express');
 let fileUpload  = require ('express-fileupload') ; 
 let session     = require('express-session');
+var csrf 		= require('csurf')
 let bodyParser  = require('body-parser');
 let path        = require('path');
 let app 		= express();
-
 
 require('dotenv').config() // leer datos de archivo .env
 const { connection } = require('./database/db') // Conexion con base de datos 
@@ -40,7 +40,17 @@ app.use(bodyParser.json()); // declaro en el proyecto el uso de interfaces json
 // configuro la carga de archivos de manera global
 app.use(fileUpload());
 
+/********** CSRF TOKEN **********/
+app.use(csrf())
 
+app.use(function (err, req, res, next) { // valido csrf Token
+
+	if (err.code !== 'EBADCSRFTOKEN') return next(err)
+
+	// handle CSRF token errors here
+	res.status(403)
+	res.json({status:false, message:"Error al Validar CSRF TOKEN"})
+})
 
 /********** Routes **********/
 let router = require('./config/routes');  // llamo el archivo de rutas

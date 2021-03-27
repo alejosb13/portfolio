@@ -22,6 +22,7 @@ async function setRecomendation(event) {
     let comment     = submit.querySelector("#comment").value        
     let img         = submit.querySelector("#image").files[0] || ""        
     let url         = BASEURL + `admin/landing/recomendations/${ idrecomendation }`;
+    let csrf        = document.querySelector('meta[name="csrf-token"]').getAttribute('content')  
     
     let  formData  = new FormData()
     formData.append('name',name) 
@@ -29,6 +30,7 @@ async function setRecomendation(event) {
     formData.append('dateworkIni',dateworkIni) 
     formData.append('comment',comment) 
     formData.append('file',img) 
+    formData.append('_csrf',csrf) 
     
     let response = await fetch(url, {
         method: 'PUT',

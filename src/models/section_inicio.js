@@ -20,19 +20,6 @@ module.exports = (sequelize, DataTypes) => {
         modelName: 'Section_Inicio',
     });
 
-    Section_Inicio.BannerKeywords = async () =>{
-        const [ results, metadata ] = await sequelize.query("SELECT kw.id,kw.keyword FROM section_inicios si INNER JOIN keywords kw ON si.keyword_section = kw.keyword_section WHERE si.`status` = 1 AND kw.`status` = 1"); // Raw query - use array destructuring
-
-        // devuelve un arreglo con keywors o array vacio
-        return (results.length > 0)? results.map( (val)=> val.keyword ) : [];
-    }
-
-    Section_Inicio.BannerKeywordsArray = async () =>{
-        const [ results, metadata ] = await sequelize.query("SELECT kw.id,kw.keyword FROM section_inicios si INNER JOIN keywords kw ON si.keyword_section = kw.keyword_section WHERE si.`status` = 1 AND kw.`status` = 1"); // Raw query - use array destructuring
-
-        // devuelve un arreglo con keywors o array vacio
-        return (results.length > 0)? results : [];
-    }
 
     Section_Inicio.All = async () =>{
         const data = await Section_Inicio.findAll({

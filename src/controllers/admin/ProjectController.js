@@ -17,6 +17,8 @@ class ProjectController {
         data.projects  = await Section_Project.All();
         data.username  = req.session.username;
         data.baseUrl   = AppHelper.getUrl(req,"baseUrl");
+        data.csrfToken = req.csrfToken()
+        
 
         res.render('admin/landing/project_view', data);
     }

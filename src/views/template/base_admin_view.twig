@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ baseUrl }}css/admin/master.css">
     {% block stylesheets %}{% endblock %}
 
+    <meta name="csrf-token" content="{{ csrfToken }}">
 </head>
 
 <body>
@@ -48,34 +49,37 @@
                         <li>
                             <a class="{% if section == "L-RECOMENDATION" %}active{% endif %}" href="{{ baseUrl }}admin/landing/recomendations">Recomendaciones</a>
                         </li>
-                        <li>
+                        {# <li>
                             <a class="{% if section == "L-FOOTER" %}active{% endif %}" href="{{ baseUrl }}admin/landing/footer">Pie de pagina</a>
-                        </li>
+                        </li> #}
                     </ul>
                 </li>
 
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Configuración</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li class="{% if section|first == "C" %}active{% endif %}">
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="{% if section|first == "C" %}true{% else %}false{% endif %}" class="dropdown-toggle">Configuración</a>
+                    <ul class="collapse list-unstyled {% if section|first == "C" %}show{% endif %}" id="pageSubmenu">
                         <li>
                             <a class="{% if section == "C-SOCIALMEDIA" %}active{% endif %}" href="{{ baseUrl }}admin/config/socialmedia">Redes Sociales</a>
                         </li>
                         <li>
                             <a class="{% if section == "C-KEYWORDS" %}active{% endif %}" href="{{ baseUrl }}admin/config/keywords">Palabras Claves</a>
                         </li>
-                        <li>
+                        {# <li>
                             <a class="{% if section == "C-HEADER" %}active{% endif %}" href="{{ baseUrl }}admin/config/head">Etiquetas en Cabecera</a>
                         </li>
                         <li>
                             <a class="{% if section == "C-FOOTER" %}active{% endif %}" href="{{ baseUrl }}admin/config/footer">Etiqueta en Pie de Página</a>
-                        </li>
+                        </li> #}
                     </ul>
                 </li>
-                <li>
+                {# <li>
                     <a href="#">Portfolio</a>
-                </li>
-                <li>
+                </li> #}
+                {# <li>
                     <a href="#">Contact</a>
+                </li> #}
+                <li>
+                    <a href="{{ baseUrl }}admin/log-out">Cerrar Sesión</a>
                 </li>
             </ul>
 

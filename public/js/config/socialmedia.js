@@ -34,12 +34,14 @@ async function upodateSocialMedia(event) {
     let idsocialmedia   = submit.querySelector("#nsocialmedia").value        
  
     let url         = BASEURL + `admin/config/socialmedia/${ idsocialmedia }`;
+    let csrf        = document.querySelector('meta[name="csrf-token"]').getAttribute('content')  
     
     let  formData  = new FormData()
     formData.append('name',name) 
     formData.append('url',urlvalue) 
     formData.append('tag',tag) 
     formData.append('html',html) 
+    formData.append('_csrf',csrf) 
     
     let response = await fetch(url, {
         method: 'PUT',
@@ -78,13 +80,15 @@ async function insertSocialMedia(event) {
     }
 
     let url        = BASEURL + `admin/config/socialmedia`;
-    
+    let csrf        = document.querySelector('meta[name="csrf-token"]').getAttribute('content')  
+
     let  formData  = new FormData()
     formData.append('name',name) 
     formData.append('url',urlvalue) 
     formData.append('tag',tag) 
     formData.append('html',html) 
-    
+    formData.append('_csrf',csrf) 
+
     let response = await fetch(url, {
         method: 'POST',
         body: formData, 

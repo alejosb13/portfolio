@@ -17,6 +17,8 @@ class RecomendationController {
         data.recomendations = await Section_Recomendation.All();
         data.username       = req.session.username;
         data.baseUrl        = AppHelper.getUrl(req,"baseUrl");
+        data.csrfToken      = req.csrfToken()
+
 
         res.render('admin/landing/recomendation_view', data);
     }
