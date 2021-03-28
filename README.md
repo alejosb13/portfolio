@@ -2,6 +2,16 @@
 
 Este proyecto es una página web personal de tipo portafolio realizada con Nodejs.
 
+## Construido Con
+
+* [Bootstrap](https://getbootstrap.com/docs/4.6/getting-started/introduction/) - Framework CSS
+* [Sequelize](https://sequelize.org/master/) - ORM (Object-Relational mapping)
+* [Twig](https://twig.symfony.com/doc/3.x/) - Sistema de plantillas
+* [Express](https://expressjs.com/es/) - Framework de Nodejs
+* [Jquery](https://jquery.com/) - Framework JS
+* [Nodejs](https://nodejs.org/es/docs/) - Lenguaje de programación
+
+
 ---
 ## Requerimientos
 
@@ -20,11 +30,12 @@ Para el desarrollo, solo necesitará Node.js, Mysql y configurar las variables d
 Crear un archivo .env en el directorio raíz con las siguientes variables:
 
 ```bash
-    DB_HOST     : localhost
-    DB_USER     : root
-    DB_PASSWORD : 
-    DB_NAME     : base_project
-    APP_PORT    : 3001
+    DB_HOST     = localhost
+    DB_USER     = root
+    DB_PASSWORD = 
+    DB_NAME     = base_project
+    APP_PORT    = 3001
+    APP_KEY     = KEYTEST
 ```
 
 ## Iniciar el servidor en desarrollo
